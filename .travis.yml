@@ -16,8 +16,8 @@ matrix:
     - conan profile update settings.compiler.libcxx=libc++ default
   - os: windows
     env:
-      - OH_PLATFORM=Mac-x64
-    env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+      - PATH=/c/Python38:/c/Python38/Scripts:$PATH
+      - OH_PLATFORM=Windows-x86
     before_install:
     - export CMAKE_GENERATOR="Visual Studio 15 2017"
     - export MSVER=14.16.27023
