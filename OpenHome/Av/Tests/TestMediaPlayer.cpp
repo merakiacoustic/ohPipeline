@@ -510,7 +510,7 @@ void TestMediaPlayer::DestroyAppFramework()
     iAppFramework = nullptr;
 }
 
-void TestMediaPlayer::WriteResource(const Brx& aUriTail, TIpAddress /*aInterface*/, std::vector<char*>& /*aLanguageList*/, IResourceWriter& aResourceWriter)
+void TestMediaPlayer::WriteResource(const Brx& aUriTail, const TIpAddress& /*aInterface*/, std::vector<char*>& /*aLanguageList*/, IResourceWriter& aResourceWriter)
 {
     if (aUriTail == kSongcastSenderIconFileName) {
         aResourceWriter.WriteResourceBegin(sizeof(kIconDriverSongcastSender), kIconDriverSongcastSenderMimeType);
@@ -665,14 +665,15 @@ OpenHome::Net::Library* TestMediaPlayerInit::CreateLibrary(const TChar* aRoom, T
     }
     Log::Print ("adapter list:\n");
     for (unsigned i=0; i<subnetList->size(); ++i) {
-        TIpAddress addr = (*subnetList)[i]->Address();
+        uint32_t addr = (*subnetList)[i]->Address().iV4;
         Log::Print ("  %d: %d.%d.%d.%d\n", i, addr&0xff, (addr>>8)&0xff, (addr>>16)&0xff, (addr>>24)&0xff);
     }
     //TIpAddress address = (*subnetList)[adapterIndex]->Address();
     TIpAddress subnet = (*subnetList)[adapterIndex]->Subnet();
     Library::DestroySubnetList(subnetList);
     lib->SetCurrentSubnet(subnet);
-    Log::Print("using subnet %d.%d.%d.%d\n", subnet&0xff, (subnet>>8)&0xff, (subnet>>16)&0xff, (subnet>>24)&0xff);
+    uint32_t print_subnet = subnet.iV4;
+    Log::Print("using print_subnet %d.%d.%d.%d\n", print_subnet&0xff, (print_subnet>>8)&0xff, (print_subnet>>16)&0xff, (print_subnet>>24)&0xff);
     return lib;
 }
 

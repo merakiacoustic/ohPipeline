@@ -73,7 +73,7 @@ void ProtocolOhm::UnicastOverrideDisabled()
 
 ProtocolStreamResult ProtocolOhm::Play(TIpAddress aInterface, TUint aTtl, const Endpoint& aEndpoint)
 {
-    if (aEndpoint.Address() == 0) {
+    if (TIpAddressUtils::IsZero(aEndpoint.Address())) {
         // ohm null address
         // return immediately and leave the Filler to clear all track data
         return EProtocolStreamStopped;

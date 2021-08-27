@@ -54,8 +54,8 @@ void OdpDevice::Deregister()
 
 TBool OdpDevice::NetworkAdapterAndPortMatch(const NetworkAdapter& aAdapter, TUint aZeroConfPort) const
 {
-    if (aAdapter.Address() == iAdapter.Address()
-        && aAdapter.Subnet() == iAdapter.Subnet()
+    if (TIpAddressUtils::Equals(aAdapter.Address(), iAdapter.Address())
+        && TIpAddressUtils::Equals(aAdapter.Subnet(), iAdapter.Subnet())
         && (strcmp(aAdapter.Name(), iAdapter.Name()) == 0)
         && aZeroConfPort == iEndpoint.Port()) {
         return true;
@@ -69,7 +69,7 @@ void OdpDevice::RegisterLocked()
     iEndpoint.AppendEndpoint(epBuf);
     LOG(kBonjour, "OdpDevice::RegisterLocked iRegistered: %u, iEndpoint: %.*s\n", iRegistered, PBUF(epBuf));
 
-    if (iRegistered || iEndpoint.Address() == 0) {
+    if (iRegistered || TIpAddressUtils::IsZero(iEndpoint.Address())) {
         return;
     }
 
@@ -180,7 +180,7 @@ void DviSessionOdp::WriteEnd()
     iWriteBuffer->WriteFlush();
 }
 
-TIpAddress DviSessionOdp::Adapter() const
+const TIpAddress& DviSessionOdp::Adapter() const
 {
     return iAdapter;
 }
@@ -216,6 +216,11 @@ void DviServerOdp::SetServerCreatedCallback(Functor aCallback)
     iServerCreated = aCallback;
 }
 
+void DviServerOdp::Start()
+{
+
+}
+
 SocketTcpServer* DviServerOdp::CreateServer(const NetworkAdapter& aNif)
 {
     auto server = new SocketTcpServer(iDvStack.Env(), "OdpServer", iPort, aNif.Address());
@@ -233,11 +238,11 @@ SocketTcpServer* DviServerOdp::CreateServer(const NetworkAdapter& aNif)
     return server;
 }
 
-void DviServerOdp::NotifyServerDeleted(TIpAddress /*aInterface*/) 
+void DviServerOdp::NotifyServerDeleted(const TIpAddress& /*aInterface*/) 
 { 
 } 
 
-void DviServerOdp::NotifyServerCreated(TIpAddress /*aInterface*/)
+void DviServerOdp::NotifyServerCreated(const TIpAddress& /*aInterface*/)
 {
     if (iServerCreated) {
         iServerCreated();

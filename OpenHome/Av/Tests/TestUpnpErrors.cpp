@@ -192,9 +192,9 @@ static void RandomiseUdn(DvStack& aDvStack, Bwh& aUdn)
     Bws<Ascii::kMaxUintStringBytes> buf;
     srand((unsigned int)time(nullptr));
     std::vector<NetworkAdapter*>* subnetList = aDvStack.Env().NetworkAdapterList().CreateSubnetList();
-    TUint max = (*subnetList)[0]->Address();
+    TIpAddress max = (*subnetList)[0]->Address();
     aDvStack.Env().NetworkAdapterList().DestroySubnetList(subnetList);
-    (void)Ascii::AppendDec(buf, rand() % max);
+    (void)Ascii::AppendDec(buf, rand() % max.iV4);
     aUdn.Append(buf);
     aUdn.PtrZ();
 }

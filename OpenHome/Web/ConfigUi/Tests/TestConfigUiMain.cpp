@@ -17,13 +17,14 @@ void OpenHome::TestFramework::Runner::Main(TInt /*aArgc*/, TChar* /*aArgv*/[], N
     ASSERT(subnetList->size() > 0);
     Log::Print ("adapter list:\n");
     for (unsigned i=0; i<subnetList->size(); ++i) {
-        TIpAddress addr = (*subnetList)[i]->Address();
+        uint32_t addr = (*subnetList)[i]->Address().iV4;
         Log::Print ("  %d: %d.%d.%d.%d\n", i, addr&0xff, (addr>>8)&0xff, (addr>>16)&0xff, (addr>>24)&0xff);
     }
     TIpAddress subnet = (*subnetList)[0]->Subnet();
     Net::Library::DestroySubnetList(subnetList);
     lib->SetCurrentSubnet(subnet);
-    Log::Print("using subnet %d.%d.%d.%d\n", subnet&0xff, (subnet>>8)&0xff, (subnet>>16)&0xff, (subnet>>24)&0xff);
+    uint32_t print_subnet = subnet.iV4;
+    Log::Print("using print_subnet %d.%d.%d.%d\n", print_subnet&0xff, (print_subnet>>8)&0xff, (print_subnet>>16)&0xff, (print_subnet>>24)&0xff);
 
     Net::CpStack* cpStack;
     Net::DvStack* dvStack;

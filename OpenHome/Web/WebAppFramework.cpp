@@ -1045,7 +1045,7 @@ void WebAppFramework::Add(IWebApp* aWebApp, FunctorPresentationUrl aFunctor)
     iWebApps.insert(WebAppPair(&webAppInternal->ResourcePrefix(), webAppInternal));
 
     TIpAddress addr = iServer->Interface();
-    if (addr == 0) {
+    if (TIpAddressUtils::IsZero(addr)) {
         if (iCurrentAdapter != nullptr) {
             addr = iCurrentAdapter->Address();
         }
