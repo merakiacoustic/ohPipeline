@@ -19,6 +19,12 @@ using namespace OpenHome;
 using namespace OpenHome::Av;
 using namespace OpenHome::Net;
 
+bool operator==(const TIpAddress& l, const TIpAddress& p)
+{
+    return l.iFamily == p.iFamily
+        && l.iV4 == p.iV4
+        && l.iV6 == p.iV6;
+}
 
 // MSearchObserver
 
@@ -28,7 +34,7 @@ MSearchObserver::MSearchObserver(Environment& aEnv)
     : iLock("MObs")
     , iEnv(aEnv)
     , iMulticastListener(nullptr)
-    , iMulticastAdapter(0)
+    , iMulticastAdapter({0})
 {
     iRecentSearchers.reserve(kMaxAddresses);
     iAdapterChangeListenerId = iEnv.NetworkAdapterList().AddCurrentChangeListener(MakeFunctor(*this, &MSearchObserver::CurrentAdapterChanged), "Av::MSearchObserver");
@@ -62,7 +68,7 @@ void MSearchObserver::CurrentAdapterChanged()
     AutoNetworkAdapterRef adRef(iEnv, "Av::MSearchObserver");
     const auto ad = adRef.Adapter();
     if (ad == nullptr) {
-        iMulticastAdapter = 0;
+        iMulticastAdapter = {0};
     }
     else {
         iMulticastAdapter = ad->Address();

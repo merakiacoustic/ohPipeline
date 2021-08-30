@@ -645,7 +645,7 @@ OhmSender::OhmSender(Environment& aEnv, Net::DvDeviceStandard& aDevice, IOhmSend
     , iZoneHandler(&aZoneHandler)
     , iName(aName)
     , iChannel(aChannel)
-    , iInterface(0)
+    , iInterface(kIpAddressV4AllAdapters )
     , iLatency(aLatency)
     , iMulticast(aMulticast)
     , iEnabled(false)
@@ -822,11 +822,11 @@ void OhmSender::CurrentSubnetChanged()
 
     static const TChar* kNifCookie = "OhmSender";
     NetworkAdapter* current = iEnv.NetworkAdapterList().CurrentAdapter(kNifCookie).Ptr();
-    const TIpAddress addr = (current? current->Address() : 0);
+    const TIpAddress addr = (current ? current->Address() : kIpAddressV4AllAdapters );
     if (current != nullptr) {
         current->RemoveRef(kNifCookie);
     }
-    if (iInterface != addr) {
+    if (!TIpAddressUtils::Equals(iInterface, addr)) {
         if (iStarted) {
             Stop();
             iInterface = addr;
@@ -974,7 +974,7 @@ void OhmSender::RunMulticast()
                 try {
                     OhmHeader header;
                     header.Internalise(iRxBuffer);
-                    
+
                     if (header.MsgType() <= OhmHeader::kMsgTypeListen) {
                         LOG(kSongcast, "OhmSender::RunMulticast join/listen received\n");
                         
@@ -1007,7 +1007,7 @@ void OhmSender::RunMulticast()
                     else if (header.MsgType() == OhmHeader::kMsgTypeAudio) {
                         // Check sender not us
                         Endpoint sender = iSocketOhm.Sender();
-                        if (sender.Address() != iInterface) {
+                        if (!TIpAddressUtils::Equals(sender.Address(), iInterface)) {
                             LOG(kSongcast, "OhmSender::RunMulticast audio received\n");
                             // The following randomisation prevents two senders from both sending,
                             // both seeing each other's audio, both backing off for the same amount of time,
@@ -1032,7 +1032,7 @@ void OhmSender::RunMulticast()
                 catch (OhmError&) {
                     LOG_ERROR(kSongcast, "OhmSender::RunMulticast OhmError\n");
                 }
-                
+
                 iRxBuffer.ReadFlush();
             }
         }
@@ -1043,7 +1043,7 @@ void OhmSender::RunMulticast()
         iRxBuffer.ReadFlush();
         iTimerAliveJoin->Cancel();
         iTimerAliveAudio->Cancel();
-        
+
         { // scope for AutoMutex
             AutoMutex mutex(iMutexActive);
             if (iActive) {
@@ -1056,7 +1056,7 @@ void OhmSender::RunMulticast()
             iProvider->NotifyListeners(false);
             iProvider->SetStatusBlocked(iAliveBlocked);
         }
-        
+
         iNetworkDeactivated.Signal();
         LOG(kSongcast, "OhmSender::RunMulticast stop\n");
     }
@@ -1308,8 +1308,9 @@ void OhmSender::TimerExpiryExpired()
 
 void OhmSender::UpdateChannel()
 {
-    TUint address = (iChannel & 0xffff) | 0xeffd0000; // 239.253.x.x
-    iMulticastEndpoint.SetAddress(Arch::BigEndian4(address));
+    TIpAddress address = kIpAddressV4AllAdapters;
+    address.iV4 = Arch::BigEndian4((iChannel & 0xffff) | 0xeffd0000); // 239.253.x.x
+    iMulticastEndpoint.SetAddress(address);
     iMulticastEndpoint.SetPort(Ohm::kPort);
 }
 

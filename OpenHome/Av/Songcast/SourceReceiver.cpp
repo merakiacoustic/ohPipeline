@@ -350,7 +350,7 @@ void SourceReceiver::SetSender(const Brx& aUri, const Brx& aMetadata)
             THROW(UriError);
         }
         const Endpoint& tgt = iZoneHandler->MulticastEndpoint();
-        if (ep.Address() != tgt.Address() || ep.Port() != tgt.Port()) {
+        if (!TIpAddressUtils::Equals(ep.Address(), tgt.Address()) || ep.Port() != tgt.Port()) {
             THROW(UriError);
         }
         const Brx& path = iUri.Path();

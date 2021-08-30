@@ -368,7 +368,7 @@ CpiDeviceListOdp::CpiDeviceListOdp(CpStack& aCpStack, FunctorCpiDevice aAdded, F
     iInterfaceChangeListenerId = ifList.AddCurrentChangeListener(MakeFunctor(*this, &CpiDeviceListOdp::CurrentNetworkAdapterChanged), "CpiDeviceListOdp-current");
     iSubnetListChangeListenerId = ifList.AddSubnetListChangeListener(MakeFunctor(*this, &CpiDeviceListOdp::SubnetListChanged), "CpiDeviceListOdp-subnet");
     if (current == NULL) {
-        iInterface = 0;
+        TIpAddressUtils::IsZero(iInterface);
     }
     else {
         iInterface = current->Address();
@@ -469,7 +469,7 @@ TBool CpiDeviceListOdp::IsLocationReachable(const Brx& aLocation) const
     Endpoint endpt(0, uri.Host());
     NetworkAdapter* nif = iCpStack.Env().NetworkAdapterList().CurrentAdapter("CpiDeviceListOdp::IsLocationReachable").Ptr();
     if (nif != NULL) {
-        if (nif->Address() == iInterface && nif->ContainsAddress(endpt.Address())) {
+        if (TIpAddressUtils::Equals(nif->Address(), iInterface) && nif->ContainsAddress(endpt.Address())) {
             reachable = true;
         }
         nif->RemoveRef("CpiDeviceListOdp::IsLocationReachable");
@@ -508,7 +508,7 @@ void CpiDeviceListOdp::SubnetListChanged()
 void CpiDeviceListOdp::HandleInterfaceChange()
 {
     NetworkAdapter* current = iCpStack.Env().NetworkAdapterList().CurrentAdapter("CpiDeviceListOdp::HandleInterfaceChange").Ptr();
-    if (current != NULL && current->Address() == iInterface) {
+    if (current != NULL && TIpAddressUtils::Equals(current->Address(), iInterface)) {
         // list of subnets has changed but our interface is still available so there's nothing for us to do here
         current->RemoveRef("CpiDeviceListOdp::HandleInterfaceChange");
         return;
@@ -516,7 +516,7 @@ void CpiDeviceListOdp::HandleInterfaceChange()
 
     if (current == NULL) {
         iLock.Wait();
-        iInterface = 0;
+        iInterface = kIpAddressV4AllAdapters;
         iLock.Signal();
         RemoveAll();
         return;

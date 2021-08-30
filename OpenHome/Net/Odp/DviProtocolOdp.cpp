@@ -15,6 +15,11 @@ IDvProtocol* DviProtocolFactoryOdp::CreateProtocol(DviDevice& aDevice)
     return new DviProtocolOdp(aDevice);
 }
 
+void DviProtocolFactoryOdp::Start()
+{
+
+}
+
 
 // DviProtocolOdp
 
@@ -29,7 +34,7 @@ DviProtocolOdp::~DviProtocolOdp()
 }
 
 void DviProtocolOdp::WriteResource(const Brx& /*aUriTail*/,
-                                   TIpAddress /*aAdapter*/,
+                                   const TIpAddress& /*aAdapter*/,
                                    std::vector<char*>& /*aLanguageList*/,
                                    IResourceWriter& /*aResourceWriter*/)
 {
