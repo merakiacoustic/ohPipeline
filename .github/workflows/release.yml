@@ -9,6 +9,7 @@ on:
 
 jobs:
   release-windows:
+    if: false # skip windows for while
     runs-on: windows-2016
     env:
       OH_PLATFORM: Windows-x86
@@ -18,6 +19,7 @@ jobs:
       TOOLSVER: BuildTools
       CXX: ""
       CC: ""
+
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-python@master
@@ -53,4 +55,43 @@ jobs:
         name: Upload artifact
         with:
           name: windows
+          path: build/ohMediaPlayer-*.tar.gz
+
+
+  release-linux:
+    env:
+      CONAN_GCC_VERSIONS: 9
+      CONAN_ARCHS: x86_64
+      OH_PLATFORM: Linux-x64
+      COMPILER_NAME: gcc
+    container:
+      image: conanio/gcc9
+      options: --user 0:0
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup conan
+        run: |
+          conan profile new default --detect || true
+          conan profile update settings.compiler.libcxx=libstdc++11 default
+          conan user
+      - name: Building 
+        shell: bash
+        run: |
+          pip install boto3
+          conan install . --build=missing
+          git clone https://github.com/merakiacoustic/ohdevtools ../ohdevtools
+          ./go fetch ohNet
+          mkdir -p dependencies/AnyPlatform
+          git clone https://github.com/merakiacoustic/ohWafHelpers.git -b enable-upstream-libressl dependencies/AnyPlatform/ohWafHelpers
+          ./waf configure -v
+          ./waf build -v
+          ./waf bundle
+          mv build/ohMediaPlayer.tar.gz build/ohMediaPlayer-$OH_PLATFORM.tar.gz
+          
+      - uses: actions/upload-artifact@v2
+        name: Upload artifact
+        with:
+          name: linux
           path: build/ohMediaPlayer-*.tar.gz
