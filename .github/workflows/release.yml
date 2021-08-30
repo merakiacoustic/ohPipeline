@@ -9,7 +9,6 @@ on:
 
 jobs:
   release-windows:
-    if: false # skip windows for while
     runs-on: windows-2016
     env:
       OH_PLATFORM: Windows-x86
@@ -25,10 +24,14 @@ jobs:
       - uses: actions/setup-python@master
         with:
           python-version: "3.8"
-      - name: Setup msbuild
-        uses: microsoft/setup-msbuild@v1.0.3
+      # - name: Setup MSBuild.exe
+      #   uses: microsoft/setup-msbuild@v1.0.3
+      - name: Setup MSVC++
+        uses: ilammy/msvc-dev-cmd@v1
         with:
-          vs-version: '[${{ env.MSVER }}]'
+          arch: x86
+          sdk: ${{ env.WKITVER }}
+          toolset: ${{ env.MSVER }}
       - name: Generating conan user directory
         run: |
           python --version
@@ -39,7 +42,6 @@ jobs:
           conan user
 
       - name: Building 
-        shell: bash
         run: |
           pip install boto3
           conan install . --build=missing
@@ -100,6 +102,7 @@ jobs:
 
   release-osx:
     runs-on: macOS-latest
+    if: false # works! Will be turned on later
     env:
       OH_PLATFORM: Mac-x64
     steps:
