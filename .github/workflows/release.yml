@@ -59,6 +59,7 @@ jobs:
 
 
   release-linux:
+    if: false # works! Will be turned on later
     env:
       CONAN_GCC_VERSIONS: 9
       CONAN_ARCHS: x86_64
@@ -95,3 +96,37 @@ jobs:
         with:
           name: linux
           path: build/ohMediaPlayer-*.tar.gz
+
+
+  release-osx:
+    runs-on: macOS-latest
+    env:
+      OH_PLATFORM: Mac-x64
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-python@master
+        with:
+          python-version: "3.8"
+      - name: Setup environment
+        run: |
+          pip3 install virtualenv
+          virtualenv -p python3 venv
+          source venv/bin/activate
+      - name: Setup conan
+        run: |
+          python -m pip install conan==1.39.0 conan_package_tools -U
+          conan profile new default --detect
+          conan profile update settings.compiler.libcxx=libc++ default
+          conan user
+      - name: Building
+        run: |
+          pip install boto3
+          conan install . --build=missing
+          git clone https://github.com/merakiacoustic/ohdevtools ../ohdevtools
+          ./go fetch ohNet
+          mkdir -p dependencies/AnyPlatform
+          git clone https://github.com/merakiacoustic/ohWafHelpers.git -b enable-upstream-libressl dependencies/AnyPlatform/ohWafHelpers
+          ./waf configure -v
+          ./waf build -v
+          ./waf bundle
+          mv build/ohMediaPlayer.tar.gz build/ohMediaPlayer-$OH_PLATFORM.tar.gz
