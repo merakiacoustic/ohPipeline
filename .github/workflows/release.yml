@@ -18,14 +18,11 @@ jobs:
       TOOLSVER: BuildTools
       CXX: ""
       CC: ""
-
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-python@master
         with:
           python-version: "3.8"
-      # - name: Setup MSBuild.exe
-      #   uses: microsoft/setup-msbuild@v1.0.3
       - name: Setup MSVC++
         uses: ilammy/msvc-dev-cmd@v1
         with:
@@ -40,7 +37,6 @@ jobs:
           conan profile update settings.arch=x86 default
           conan profile update settings.compiler.runtime=MT default
           conan user
-
       - name: Building 
         run: |
           pip install boto3
@@ -58,10 +54,16 @@ jobs:
         with:
           name: windows
           path: build/ohMediaPlayer-*.tar.gz
-
+      - uses: svenstaro/upload-release-action@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        name: Upload attachment to release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file_glob: true
+          file: build/ohMediaPlayer-*.tar.gz
+          tag: ${{ github.ref }}
 
   release-linux:
-    if: false # works! Will be turned on later
     env:
       CONAN_GCC_VERSIONS: 9
       CONAN_ARCHS: x86_64
@@ -71,7 +73,6 @@ jobs:
       image: conanio/gcc9
       options: --user 0:0
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@master
       - name: Setup conan
@@ -92,17 +93,27 @@ jobs:
           ./waf build -v
           ./waf bundle
           mv build/ohMediaPlayer.tar.gz build/ohMediaPlayer-$OH_PLATFORM.tar.gz
-          
       - uses: actions/upload-artifact@v2
         name: Upload artifact
         with:
           name: linux
           path: build/ohMediaPlayer-*.tar.gz
-
+      - uses: actions/upload-artifact@v2
+        name: Upload artifact
+        with:
+          name: linux
+          path: build/ohMediaPlayer-*.tar.gz
+      - uses: svenstaro/upload-release-action@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        name: Upload attachment to release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file_glob: true
+          file: build/ohMediaPlayer-*.tar.gz
+          tag: ${{ github.ref }}
 
   release-osx:
     runs-on: macOS-latest
-    if: false # works! Will be turned on later
     env:
       OH_PLATFORM: Mac-x64
     steps:
@@ -133,3 +144,16 @@ jobs:
           ./waf build -v
           ./waf bundle
           mv build/ohMediaPlayer.tar.gz build/ohMediaPlayer-$OH_PLATFORM.tar.gz
+      - uses: actions/upload-artifact@v2
+        name: Upload artifact
+        with:
+          name: mac
+          path: build/ohMediaPlayer-*.tar.gz
+      - uses: svenstaro/upload-release-action@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        name: Upload attachment to release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file_glob: true
+          file: build/ohMediaPlayer-*.tar.gz
+          tag: ${{ github.ref }}
