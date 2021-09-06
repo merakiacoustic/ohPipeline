@@ -6,7 +6,7 @@
         "version": "1.32.4350",
         "cross-check": false,
         "archive-filename": "${name}-${platform}-${debugmode}.tar.gz",
-        "archive-path": "https://github.com/KGrzeg/ohNet/releases/download/ohNet_${version}/${archive-filename}",
+        "archive-path": "https://github.com/merakiacoustic/ohNet/releases/download/ohNet_${version}/${archive-filename}",
         "dest": "dependencies/${platform}/",
         "configure-args": [
             "--ohnet-lib-dir", "${main-dir}/lib",
