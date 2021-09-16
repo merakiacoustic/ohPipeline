@@ -3,7 +3,7 @@
         "name": "ohNet",
         "type": "external",
         "platform-specific": true,
-        "version": "1.32.4350",
+        "version": "1.32.4350_m1",
         "cross-check": false,
         "archive-filename": "${name}-${platform}-${debugmode}.tar.gz",
         "archive-path": "https://github.com/merakiacoustic/ohNet/releases/download/ohNet_${version}/${archive-filename}",
