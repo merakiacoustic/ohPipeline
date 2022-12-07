@@ -28,7 +28,7 @@ in {
     shellHook = ''
       [ ! -d venv ] && python3 -m virtualenv venv
       source venv/bin/activate
-      pip3 install conan==1.33.0
+      pip3 install conan==1.54.0
     '';
   };
 }

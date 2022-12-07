@@ -6,6 +6,22 @@ if(NOT DEFINED OHNET_PATH)
 endif()
 
 set(ENDIANNESS DEFINE_LITTLE_ENDIAN)
+set(THIRDPARTY_HEADERS
+  thirdparty/libogg/include
+  thirdparty/flac-1.2.1/src/plugin_winamp2/include
+  thirdparty/flac-1.2.1/src/share/replaygain_synthesis/include
+  thirdparty/flac-1.2.1/src/libFLAC/include
+  thirdparty/flac-1.2.1/include
+  thirdparty/fdk-aac/libMpegTPDec/include
+  thirdparty/fdk-aac/libFDK/include
+  thirdparty/fdk-aac/libAACenc/include
+  thirdparty/fdk-aac/libPCMutils/include
+  thirdparty/fdk-aac/libSBRenc/include
+  thirdparty/fdk-aac/libAACdec/include
+  thirdparty/fdk-aac/libMpegTPEnc/include
+  thirdparty/fdk-aac/libSYS/include
+  thirdparty/fdk-aac/libSBRdec/include
+)
 
 set(sources
   OpenHome/Media/Pipeline/VolumeRamper.cpp
@@ -75,11 +91,16 @@ set(sources
   OpenHome/SocketSsl.cpp
 )
 
-set(CMAKE_CXX_STANDARD 11)
+# set(CMAKE_CXX_STANDARD 11)
+add_compile_options(-g -pipe -D_GNU_SOURCE -D_REENTRANT -DDEFINE_TRACE -DDEFINE_LITTLE_ENDIAN -fvisibility=hidden -O2 -std=c++0x -fexceptions -Wall -Werror -m64 -Wno-psabi -fPIC)
 
-add_library(ohPipeline SHARED ${sources})
+add_library(ohPipeline STATIC ${sources})
+
+
 target_include_directories(ohPipeline PRIVATE ${CMAKE_SOURCE_DIR})
-target_include_directories(ohPipeline PUBLIC ${OHNET_PATH})
+target_include_directories(ohPipeline PUBLIC ${OHNET_PATH} ${THIRDPARTY_HEADERS})
 target_compile_definitions(ohPipeline PUBLIC ${ENDIANNESS} _GNU_SOURCE)
-target_compile_definitions(ohPipeline PUBLIC _GNU_SOURCE)
 
+set(CONAN_DISABLE_CHECK_COMPILER 1)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()

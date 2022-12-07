@@ -2,4 +2,7 @@
 libressl/2.9.2
 
 [generators]
+cmake
+CMakeDeps
+CMakeToolchain
 json
