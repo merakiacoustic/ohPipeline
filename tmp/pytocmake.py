@@ -1,18 +1,48 @@
+#! python
+from typing import Union
+
+
 g_output = ""
 
-# TODO: transpile some dependencies,
-# TODO: like OHNET into ohNet or SSL into "" (bcs it is loaded by conan)
+renameDeps = {
+  "OHNET": "ohNet",
+  "SSL": " "
+}
 
-# TODO: implement executables
+gens = [
+  "AVTransport1",
+  "ConnectionManager1",
+  "RenderingControl1",
+  "Product3",
+  "Radio1",
+  "Sender2",
+  "Playlist1",
+  "Receiver1",
+  "Time1",
+  "Info1",
+  "Volume4",
+  "Config2",
+  "ConfigApp1",
+  "Credentials1",
+  "Debug2",
+  "Transport1",
+  "Pins1"
+]
 
-def stlib(source: list[str], use: list[str], target: str) -> None:
+def stlib(source: Union[list[str], str], use: list[str], target: str, shlib = '') -> None:
   global g_output
+
+  if type(source) == str:
+    source = [source]
 
   src_var_name = target.upper() + "_SOURCES"
 
   txt = f"set({src_var_name}\n"
   for src in source:
-    txt += f"  {src}\n"
+    txt += f" {src}\n"
+    if any(s in src for s in gens):
+      txt += f" {src.replace('.cpp', '.h')}\n"
+
   txt += ")\n\n"
 
   txt += f"""
@@ -24,140 +54,167 @@ target_include_directories({target} PUBLIC
   ${{CMAKE_BINARY_DIR}}
   "${{CMAKE_BINARY_DIR}}/Generated"
 )
-target_link_libraries({target} PUBLIC {' '.join(use)})
+target_link_libraries({target} PUBLIC {' '.join([renameDeps.get(u) or u for u in use])})
+target_compile_definitions({target} PUBLIC ${{ENDIANNESS}})
+  """
+  g_output += txt + "\n\n"
+
+
+def program(source: Union[list[str], str], use: list[str], target: str, install_path) -> None:
+  global g_output
+
+  if type(source) == str:
+    source = [source]
+
+  src_var_name = target.upper() + "_SOURCES"
+
+  txt = f"set({src_var_name}\n"
+  for src in source:
+    txt += f"  {src}\n"
+    if src.startswith("Generated"):
+      txt += f"  {src.replace('.cpp', '.h')}\n"
+  txt += ")\n\n"
+
+  txt += f"""
+add_executable({target} ${{{src_var_name}}})
+target_include_directories({target} PRIVATE ${{CMAKE_SOURCE_DIR}})
+target_include_directories({target} PUBLIC
+  ${{OHNET_PATH}}
+  ${{THIRDPARTY_HEADERS}}
+  ${{CMAKE_BINARY_DIR}}
+  "${{CMAKE_BINARY_DIR}}/Generated"
+)
+target_link_libraries({target} PUBLIC {' '.join([renameDeps.get(u) or u for u in use])})
 target_compile_definitions({target} PUBLIC ${{ENDIANNESS}})
   """
   g_output += txt + "\n\n"
 
 # Library
-stlib(
-        source=[
-            'OpenHome/Media/Pipeline/VolumeRamper.cpp',
-            'OpenHome/Media/Pipeline/AudioDumper.cpp',
-            'OpenHome/Media/Pipeline/AudioReservoir.cpp',
-            'OpenHome/Media/Pipeline/DecodedAudioAggregator.cpp',
-            'OpenHome/Media/Pipeline/DecodedAudioReservoir.cpp',
-            'OpenHome/Media/Pipeline/DecodedAudioValidator.cpp',
-            'OpenHome/Media/Pipeline/Drainer.cpp',
-            'OpenHome/Media/Pipeline/EncodedAudioReservoir.cpp',
-            'OpenHome/Media/Pipeline/Flusher.cpp',
-            'OpenHome/Media/Pipeline/Logger.cpp',
-            'OpenHome/Media/Pipeline/Msg.cpp',
-            'OpenHome/Media/Pipeline/Muter.cpp',
-            'OpenHome/Media/Pipeline/MuterVolume.cpp',
-            'OpenHome/Media/Pipeline/PreDriver.cpp',
-            'OpenHome/Media/Pipeline/Attenuator.cpp',
-            'OpenHome/Media/Pipeline/Ramper.cpp',
-            'OpenHome/Media/Pipeline/Reporter.cpp',
-            'OpenHome/Media/Pipeline/SpotifyReporter.cpp',
-            'OpenHome/Media/Pipeline/RampValidator.cpp',
-            'OpenHome/Media/Pipeline/Rewinder.cpp',
-            'OpenHome/Media/Pipeline/Router.cpp',
-            'OpenHome/Media/Pipeline/StreamValidator.cpp',
-            'OpenHome/Media/Pipeline/Seeker.cpp',
-            'OpenHome/Media/Pipeline/Skipper.cpp',
-            'OpenHome/Media/Pipeline/StarvationRamper.cpp',
-            'OpenHome/Media/Pipeline/Stopper.cpp',
-            'OpenHome/Media/Pipeline/TrackInspector.cpp',
-            'OpenHome/Media/Pipeline/VariableDelay.cpp',
-            'OpenHome/Media/Pipeline/Waiter.cpp',
-            'OpenHome/Media/Pipeline/Pipeline.cpp',
-            'OpenHome/Media/Pipeline/ElementObserver.cpp',
-            'OpenHome/Media/IdManager.cpp',
-            'OpenHome/Media/Filler.cpp',
-            'OpenHome/Media/Supply.cpp',
-            'OpenHome/Media/SupplyAggregator.cpp',
-            'OpenHome/Media/Utils/AnimatorBasic.cpp',
-            'OpenHome/Media/Utils/ProcessorAudioUtils.cpp',
-            'OpenHome/Media/Utils/ClockPullerManual.cpp',
-            'OpenHome/Media/Codec/Mpeg4.cpp',
-            'OpenHome/Media/Codec/Container.cpp',
-            'OpenHome/Media/Codec/Id3v2.cpp',
-            'OpenHome/Media/Codec/MpegTs.cpp',
-            'OpenHome/Media/Codec/CodecController.cpp',
-            'OpenHome/Media/Protocol/Protocol.cpp',
-            'OpenHome/Media/Protocol/ProtocolHls.cpp',
-            'OpenHome/Media/Protocol/ProtocolHttp.cpp',
-            'OpenHome/Media/Protocol/ProtocolFile.cpp',
-            'OpenHome/Media/Protocol/ProtocolTone.cpp',
-            'OpenHome/Media/Protocol/Icy.cpp',
-            'OpenHome/Media/Protocol/Rtsp.cpp',
-            'OpenHome/Media/Protocol/ProtocolRtsp.cpp',
-            'OpenHome/Media/Protocol/ContentAudio.cpp',
-            'OpenHome/Media/UriProviderRepeater.cpp',
-            'OpenHome/Media/UriProviderSingleTrack.cpp',
-            'OpenHome/Media/PipelineManager.cpp',
-            'OpenHome/Media/PipelineObserver.cpp',
-            'OpenHome/Media/MuteManager.cpp',
-            'OpenHome/Media/FlywheelRamper.cpp',
-            'OpenHome/Media/MimeTypeList.cpp',
-            'OpenHome/Media/Utils/AllocatorInfoLogger.cpp', # needed here by MediaPlayer.  Should move back to tests lib
-            'OpenHome/Configuration/BufferPtrCmp.cpp',
-            'OpenHome/Configuration/ConfigManager.cpp',
-            'OpenHome/Media/Utils/Silencer.cpp',
-            'OpenHome/SocketHttp.cpp',
-            'OpenHome/SocketSsl.cpp',
-        ],
-        use=['ohNetCore', 'OHNET', 'SSL'],
-        target='ohPipeline')
+# stlib(
+#         source=[
+#             'OpenHome/Media/Pipeline/VolumeRamper.cpp',
+#             'OpenHome/Media/Pipeline/AudioDumper.cpp',
+#             'OpenHome/Media/Pipeline/AudioReservoir.cpp',
+#             'OpenHome/Media/Pipeline/DecodedAudioAggregator.cpp',
+#             'OpenHome/Media/Pipeline/DecodedAudioReservoir.cpp',
+#             'OpenHome/Media/Pipeline/DecodedAudioValidator.cpp',
+#             'OpenHome/Media/Pipeline/Drainer.cpp',
+#             'OpenHome/Media/Pipeline/EncodedAudioReservoir.cpp',
+#             'OpenHome/Media/Pipeline/Flusher.cpp',
+#             'OpenHome/Media/Pipeline/Logger.cpp',
+#             'OpenHome/Media/Pipeline/Msg.cpp',
+#             'OpenHome/Media/Pipeline/Muter.cpp',
+#             'OpenHome/Media/Pipeline/MuterVolume.cpp',
+#             'OpenHome/Media/Pipeline/PreDriver.cpp',
+#             'OpenHome/Media/Pipeline/Attenuator.cpp',
+#             'OpenHome/Media/Pipeline/Ramper.cpp',
+#             'OpenHome/Media/Pipeline/Reporter.cpp',
+#             'OpenHome/Media/Pipeline/SpotifyReporter.cpp',
+#             'OpenHome/Media/Pipeline/RampValidator.cpp',
+#             'OpenHome/Media/Pipeline/Rewinder.cpp',
+#             'OpenHome/Media/Pipeline/Router.cpp',
+#             'OpenHome/Media/Pipeline/StreamValidator.cpp',
+#             'OpenHome/Media/Pipeline/Seeker.cpp',
+#             'OpenHome/Media/Pipeline/Skipper.cpp',
+#             'OpenHome/Media/Pipeline/StarvationRamper.cpp',
+#             'OpenHome/Media/Pipeline/Stopper.cpp',
+#             'OpenHome/Media/Pipeline/TrackInspector.cpp',
+#             'OpenHome/Media/Pipeline/VariableDelay.cpp',
+#             'OpenHome/Media/Pipeline/Waiter.cpp',
+#             'OpenHome/Media/Pipeline/Pipeline.cpp',
+#             'OpenHome/Media/Pipeline/ElementObserver.cpp',
+#             'OpenHome/Media/IdManager.cpp',
+#             'OpenHome/Media/Filler.cpp',
+#             'OpenHome/Media/Supply.cpp',
+#             'OpenHome/Media/SupplyAggregator.cpp',
+#             'OpenHome/Media/Utils/AnimatorBasic.cpp',
+#             'OpenHome/Media/Utils/ProcessorAudioUtils.cpp',
+#             'OpenHome/Media/Utils/ClockPullerManual.cpp',
+#             'OpenHome/Media/Codec/Mpeg4.cpp',
+#             'OpenHome/Media/Codec/Container.cpp',
+#             'OpenHome/Media/Codec/Id3v2.cpp',
+#             'OpenHome/Media/Codec/MpegTs.cpp',
+#             'OpenHome/Media/Codec/CodecController.cpp',
+#             'OpenHome/Media/Protocol/Protocol.cpp',
+#             'OpenHome/Media/Protocol/ProtocolHls.cpp',
+#             'OpenHome/Media/Protocol/ProtocolHttp.cpp',
+#             'OpenHome/Media/Protocol/ProtocolFile.cpp',
+#             'OpenHome/Media/Protocol/ProtocolTone.cpp',
+#             'OpenHome/Media/Protocol/Icy.cpp',
+#             'OpenHome/Media/Protocol/Rtsp.cpp',
+#             'OpenHome/Media/Protocol/ProtocolRtsp.cpp',
+#             'OpenHome/Media/Protocol/ContentAudio.cpp',
+#             'OpenHome/Media/UriProviderRepeater.cpp',
+#             'OpenHome/Media/UriProviderSingleTrack.cpp',
+#             'OpenHome/Media/PipelineManager.cpp',
+#             'OpenHome/Media/PipelineObserver.cpp',
+#             'OpenHome/Media/MuteManager.cpp',
+#             'OpenHome/Media/FlywheelRamper.cpp',
+#             'OpenHome/Media/MimeTypeList.cpp',
+#             'OpenHome/Media/Utils/AllocatorInfoLogger.cpp', # needed here by MediaPlayer.  Should move back to tests lib
+#             'OpenHome/Configuration/BufferPtrCmp.cpp',
+#             'OpenHome/Configuration/ConfigManager.cpp',
+#             'OpenHome/Media/Utils/Silencer.cpp',
+#             'OpenHome/SocketHttp.cpp',
+#             'OpenHome/SocketSsl.cpp',
+#         ],
+#         use=['ohNetCore', 'OHNET', 'SSL'],
+#         target='ohPipeline')
 
-print(g_output)
-exit()
-
-# Library
-stlib(
-        source=[
-            'OpenHome/Av/Utils/FaultCode.cpp',
-            'OpenHome/Av/KvpStore.cpp',
-            'OpenHome/Av/ProviderUtils.cpp',
-            'OpenHome/Av/Product.cpp',
-            'Generated/DvAvOpenhomeOrgProduct3.cpp',
-            'Generated/CpAvOpenhomeOrgProduct3.cpp',
-            'OpenHome/Av/ProviderProduct.cpp',
-            'Generated/DvAvOpenhomeOrgTime1.cpp',
-            'OpenHome/Av/ProviderTime.cpp',
-            'Generated/DvAvOpenhomeOrgInfo1.cpp',
-            'OpenHome/Av/ProviderInfo.cpp',
-            'Generated/DvAvOpenhomeOrgTransport1.cpp',
-            'Generated/CpAvOpenhomeOrgTransport1.cpp',
-            'OpenHome/Av/TransportControl.cpp',
-            'OpenHome/Av/ProviderTransport.cpp',
-            'OpenHome/Av/Pins/TransportPins.cpp',
-            'OpenHome/Av/Radio/TuneInPins.cpp',
-            'OpenHome/Av/Radio/RadioPins.cpp',
-            'OpenHome/Av/Pins/UrlPins.cpp',
-            'OpenHome/Av/CalmRadio/CalmRadioPins.cpp',
-            'Generated/CpAvOpenhomeOrgRadio1.cpp',
-            'Generated/DvAvOpenhomeOrgVolume4.cpp',
-            'OpenHome/Av/ProviderVolume.cpp',
-            'OpenHome/Av/Source.cpp',
-            'OpenHome/Av/MediaPlayer.cpp',
-            'OpenHome/Av/Logger.cpp',
-            'Generated/DvAvOpenhomeOrgConfig2.cpp',
-            'OpenHome/Json.cpp',
-            'OpenHome/Av/Utils/FormUrl.cpp',
-            'OpenHome/NtpClient.cpp',
-            'OpenHome/UnixTimestamp.cpp',
-            'OpenHome/Configuration/ProviderConfig.cpp',
-            'Generated/DvAvOpenhomeOrgConfigApp1.cpp',
-            'OpenHome/Configuration/ProviderConfigApp.cpp',
-            'OpenHome/PowerManager.cpp',
-            'OpenHome/ThreadPool.cpp',
-            'OpenHome/FsFlushPeriodic.cpp',
-            'OpenHome/Av/Credentials.cpp',
-            'Generated/DvAvOpenhomeOrgCredentials1.cpp',
-            'OpenHome/Av/ProviderCredentials.cpp',
-            'OpenHome/Av/VolumeManager.cpp',
-            'OpenHome/Av/FriendlyNameAdapter.cpp',
-            'Generated/DvAvOpenhomeOrgDebug2.cpp',
-            'OpenHome/Av/ProviderDebug.cpp',
-            'OpenHome/Av/Pins/Pins.cpp',
-            'Generated/DvAvOpenhomeOrgPins1.cpp',
-            'OpenHome/Av/Pins/ProviderPins.cpp',
-            'OpenHome/Av/OhMetadata.cpp',
-        ],
-        use=['OHNET', 'SSL', 'ohPipeline'],
-        target='ohMediaPlayer')
+# # Library
+# stlib(
+#         source=[
+#             'OpenHome/Av/Utils/FaultCode.cpp',
+#             'OpenHome/Av/KvpStore.cpp',
+#             'OpenHome/Av/ProviderUtils.cpp',
+#             'OpenHome/Av/Product.cpp',
+#             'Generated/DvAvOpenhomeOrgProduct3.cpp',
+#             'Generated/CpAvOpenhomeOrgProduct3.cpp',
+#             'OpenHome/Av/ProviderProduct.cpp',
+#             'Generated/DvAvOpenhomeOrgTime1.cpp',
+#             'OpenHome/Av/ProviderTime.cpp',
+#             'Generated/DvAvOpenhomeOrgInfo1.cpp',
+#             'OpenHome/Av/ProviderInfo.cpp',
+#             'Generated/DvAvOpenhomeOrgTransport1.cpp',
+#             'Generated/CpAvOpenhomeOrgTransport1.cpp',
+#             'OpenHome/Av/TransportControl.cpp',
+#             'OpenHome/Av/ProviderTransport.cpp',
+#             'OpenHome/Av/Pins/TransportPins.cpp',
+#             'OpenHome/Av/Radio/TuneInPins.cpp',
+#             'OpenHome/Av/Radio/RadioPins.cpp',
+#             'OpenHome/Av/Pins/UrlPins.cpp',
+#             'OpenHome/Av/CalmRadio/CalmRadioPins.cpp',
+#             'Generated/CpAvOpenhomeOrgRadio1.cpp',
+#             'Generated/DvAvOpenhomeOrgVolume4.cpp',
+#             'OpenHome/Av/ProviderVolume.cpp',
+#             'OpenHome/Av/Source.cpp',
+#             'OpenHome/Av/MediaPlayer.cpp',
+#             'OpenHome/Av/Logger.cpp',
+#             'Generated/DvAvOpenhomeOrgConfig2.cpp',
+#             'OpenHome/Json.cpp',
+#             'OpenHome/Av/Utils/FormUrl.cpp',
+#             'OpenHome/NtpClient.cpp',
+#             'OpenHome/UnixTimestamp.cpp',
+#             'OpenHome/Configuration/ProviderConfig.cpp',
+#             'Generated/DvAvOpenhomeOrgConfigApp1.cpp',
+#             'OpenHome/Configuration/ProviderConfigApp.cpp',
+#             'OpenHome/PowerManager.cpp',
+#             'OpenHome/ThreadPool.cpp',
+#             'OpenHome/FsFlushPeriodic.cpp',
+#             'OpenHome/Av/Credentials.cpp',
+#             'Generated/DvAvOpenhomeOrgCredentials1.cpp',
+#             'OpenHome/Av/ProviderCredentials.cpp',
+#             'OpenHome/Av/VolumeManager.cpp',
+#             'OpenHome/Av/FriendlyNameAdapter.cpp',
+#             'Generated/DvAvOpenhomeOrgDebug2.cpp',
+#             'OpenHome/Av/ProviderDebug.cpp',
+#             'OpenHome/Av/Pins/Pins.cpp',
+#             'Generated/DvAvOpenhomeOrgPins1.cpp',
+#             'OpenHome/Av/Pins/ProviderPins.cpp',
+#             'OpenHome/Av/OhMetadata.cpp',
+#         ],
+#         use=['OHNET', 'SSL', 'ohPipeline'],
+#         target='ohMediaPlayer')
 
 stlib(
         source=[
@@ -865,7 +922,8 @@ program(
         source='OpenHome/Av/Tests/TestMediaPlayerMain.cpp',
         use=['OHNET', 'SSL', 'ohMediaPlayer', 'ohMediaPlayerTestUtils', 'SourcePlaylist', 'SourceRadio', 'SourceSongcast', 'SourceScd', 'SourceRaop', 'SourceUpnpAv', 'WebAppFramework', 'ConfigUi'],
         target='TestMediaPlayer',
-        install_path=os.path.join(path.abspath(), 'install', 'bin'))
+        install_path="łotever")
+        # install_path=os.path.join(path.abspath(), 'install', 'bin'))
 program(
         source='OpenHome/Configuration/Tests/TestConfigManagerMain.cpp',
         use=['OHNET', 'ohMediaPlayer', 'ohMediaPlayerTestUtils'],
@@ -985,3 +1043,5 @@ stlib(
         ],
         use=['OHNET', 'ohMediaPlayer'],
         target='ScdSender')
+
+print(g_output)

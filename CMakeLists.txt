@@ -8,6 +8,7 @@ endif()
 set(ENDIANNESS DEFINE_LITTLE_ENDIAN)
 set(THIRDPARTY_HEADERS
   thirdparty/libogg/include
+  thirdparty/flac-1.2.1
   thirdparty/flac-1.2.1/src/plugin_winamp2/include
   thirdparty/flac-1.2.1/src/share/replaygain_synthesis/include
   thirdparty/flac-1.2.1/src/libFLAC/include
@@ -21,10 +22,12 @@ set(THIRDPARTY_HEADERS
   thirdparty/fdk-aac/libMpegTPEnc/include
   thirdparty/fdk-aac/libSYS/include
   thirdparty/fdk-aac/libSBRdec/include
+  thirdparty/apple_alac/codec
 )
 
 set(PLATFORM Linux-x64/ohNet-Linux-x64-Release)
 set(CODEGEN_EXECUTABLE "${CMAKE_SOURCE_DIR}/dependencies/${PLATFORM}/lib/ServiceGen/ServiceGen.py")
+set(GENERATED_FILES "")
 
 macro(generate_source xml domain type version target)
   set(TEMPLATE_FILES DvUpnpCppCoreHeader.py DvUpnpCppCoreSource.py CpUpnpCppBufferHeader.py CpUpnpCppBufferSource.py)
@@ -50,11 +53,19 @@ macro(generate_source xml domain type version target)
       COMMENT "Generating code for ${target}."
       VERBATIM
     )
+    set(GENERATED_FILES ${GENERATED_FILES} ${OUTPUT_PATH})
   endforeach()
 endmacro()
 
-# set(CMAKE_CXX_STANDARD 11)
-add_compile_options(-g -pipe -D_GNU_SOURCE -D_REENTRANT -DDEFINE_TRACE -fvisibility=hidden -O2 -std=c++0x -fexceptions -Wall -Werror -m64 -Wno-psabi -fPIC)
+add_compile_options(-g -pipe -D_GNU_SOURCE -D_REENTRANT -DDEFINE_TRACE -fvisibility=hidden -O2 -std=c++0x -fexceptions -Wall -m64 -Wno-psabi -fPIC)
+# setup third party libs
+add_compile_definitions(VERSION=1.2.1 FLAC__NO_DLL FLAC__HAS_OGG) #flac
+add_compile_definitions(TARGET_RT_LITTLE_ENDIAN) #apple_alac
+add_compile_definitions(FDK_ASSERT_ENABLE FDK_LITTLE_ENDIAN) #fdk aac
+add_compile_definitions(OPT_ACCURACY HAVE_CONFIG_H FPM_PPC) #Mad (mp3)
+add_compile_definitions(BIG_ENDIAN BYTE_ORDER=BIG_ENDIAN) #vorbis
+
+
 find_package(Python3 COMPONENTS Interpreter)
 
 generate_source("OpenHome/Av/ServiceXml/Upnp/AVTransport1.xml" "upnp.org" "AVTransport" "1" "UpnpOrgAVTransport1")
@@ -75,8 +86,15 @@ generate_source("OpenHome/Av/ServiceXml/OpenHome/Debug2.xml" "av.openhome.org" "
 generate_source("OpenHome/Av/ServiceXml/OpenHome/Transport1.xml" "av.openhome.org" "Transport" "1" "AvOpenhomeOrgTransport1")
 generate_source("OpenHome/Av/ServiceXml/OpenHome/Pins1.xml" "av.openhome.org" "Pins" "1" "AvOpenhomeOrgPins1")
 
+# force to generate files (especially headers)
+add_custom_target(
+  fake_target_runs_dependencies ALL
+  DEPENDS ${GENERATED_FILES}
+)
+
 include(${CMAKE_SOURCE_DIR}/cmake/ohpipeline.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/ohmediaplayer.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/rest.cmake)
 
 set(CONAN_DISABLE_CHECK_COMPILER 1)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
