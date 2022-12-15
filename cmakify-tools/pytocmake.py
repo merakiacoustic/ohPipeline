@@ -6,7 +6,13 @@ g_output = ""
 
 renameDeps = {
   "OHNET": "ohNet",
-  "SSL": " "
+  "SSL": " ",
+  # "OGG": " ", 
+  # "FLAC": " ", 
+  # "MAD": " ", 
+  # "AAC_FDK": " ", 
+  # "ALAC_APPLE": " ", 
+  # "VORBIS": " ", 
 }
 
 gens = [
@@ -39,9 +45,9 @@ def stlib(source: Union[list[str], str], use: list[str], target: str, shlib = ''
 
   txt = f"set({src_var_name}\n"
   for src in source:
-    txt += f" {src}\n"
+    txt += f"  {src}\n"
     if any(s in src for s in gens):
-      txt += f" {src.replace('.cpp', '.h')}\n"
+      txt += f"  {src.replace('.cpp', '.h')}\n"
 
   txt += ")\n\n"
 

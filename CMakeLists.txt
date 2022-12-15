@@ -23,6 +23,8 @@ set(THIRDPARTY_HEADERS
   thirdparty/fdk-aac/libSYS/include
   thirdparty/fdk-aac/libSBRdec/include
   thirdparty/apple_alac/codec
+  thirdparty/libmad-0.15.1b
+  thirdparty/Tremor
 )
 
 set(PLATFORM Linux-x64/ohNet-Linux-x64-Release)
