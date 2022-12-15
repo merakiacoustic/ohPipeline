@@ -67,9 +67,10 @@ set(OHMEDIAPLAYER_SOURCES
 add_library(ohMediaPlayer STATIC ${OHMEDIAPLAYER_SOURCES})
 target_include_directories(ohMediaPlayer PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(ohMediaPlayer PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
+target_link_directories(ohMediaPlayer PUBLIC ${OHNET_PATH}/lib)
 target_compile_definitions(ohMediaPlayer PUBLIC ${ENDIANNESS})

@@ -11,7 +11,7 @@ set(ODP_SOURCES
 add_library(Odp STATIC ${ODP_SOURCES})
 target_include_directories(Odp PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(Odp PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -45,7 +45,7 @@ set(SOURCEPLAYLIST_SOURCES
 add_library(SourcePlaylist STATIC ${SOURCEPLAYLIST_SOURCES})
 target_include_directories(SourcePlaylist PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(SourcePlaylist PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -73,7 +73,7 @@ set(SOURCERADIO_SOURCES
 add_library(SourceRadio STATIC ${SOURCERADIO_SOURCES})
 target_include_directories(SourceRadio PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(SourceRadio PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -105,7 +105,7 @@ set(SOURCESONGCAST_SOURCES
 add_library(SourceSongcast STATIC ${SOURCESONGCAST_SOURCES})
 target_include_directories(SourceSongcast PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(SourceSongcast PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -124,7 +124,7 @@ set(SOURCESCD_SOURCES
 add_library(SourceScd STATIC ${SOURCESCD_SOURCES})
 target_include_directories(SourceScd PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(SourceScd PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -143,7 +143,7 @@ set(SOURCERAOP_SOURCES
 add_library(SourceRaop STATIC ${SOURCERAOP_SOURCES})
 target_include_directories(SourceRaop PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(SourceRaop PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -168,7 +168,7 @@ set(SOURCEUPNPAV_SOURCES
 add_library(SourceUpnpAv STATIC ${SOURCEUPNPAV_SOURCES})
 target_include_directories(SourceUpnpAv PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(SourceUpnpAv PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -185,7 +185,7 @@ set(PODCAST_SOURCES
 add_library(Podcast STATIC ${PODCAST_SOURCES})
 target_include_directories(Podcast PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(Podcast PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -200,7 +200,7 @@ set(CODECWAV_SOURCES
 add_library(CodecWav STATIC ${CODECWAV_SOURCES})
 target_include_directories(CodecWav PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecWav PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -215,7 +215,7 @@ set(CODECPCM_SOURCES
 add_library(CodecPcm STATIC ${CODECPCM_SOURCES})
 target_include_directories(CodecPcm PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecPcm PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -230,7 +230,7 @@ set(CODECDSDDSF_SOURCES
 add_library(CodecDsdDsf STATIC ${CODECDSDDSF_SOURCES})
 target_include_directories(CodecDsdDsf PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecDsdDsf PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -245,7 +245,7 @@ set(CODECDSDDFF_SOURCES
 add_library(CodecDsdDff STATIC ${CODECDSDDFF_SOURCES})
 target_include_directories(CodecDsdDff PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecDsdDff PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -260,7 +260,7 @@ set(CODECDSDRAW_SOURCES
 add_library(CodecDsdRaw STATIC ${CODECDSDRAW_SOURCES})
 target_include_directories(CodecDsdRaw PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecDsdRaw PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -275,7 +275,7 @@ set(CODECAIFFBASE_SOURCES
 add_library(CodecAiffBase STATIC ${CODECAIFFBASE_SOURCES})
 target_include_directories(CodecAiffBase PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecAiffBase PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -290,7 +290,7 @@ set(CODECAIFC_SOURCES
 add_library(CodecAifc STATIC ${CODECAIFC_SOURCES})
 target_include_directories(CodecAifc PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecAifc PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -305,7 +305,7 @@ set(CODECAIFF_SOURCES
 add_library(CodecAiff STATIC ${CODECAIFF_SOURCES})
 target_include_directories(CodecAiff PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecAiff PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -314,21 +314,20 @@ target_link_libraries(CodecAiff PUBLIC CodecAiffBase ohNet)
 target_compile_definitions(CodecAiff PUBLIC ${ENDIANNESS})
 
 # set(LIBOGG_SOURCES
-#   thirdparty/libogg/src/bitwise.c
-#   thirdparty/libogg/src/framing.c
+# thirdparty/libogg/src/bitwise.c
+# thirdparty/libogg/src/framing.c
 # )
 
 # add_library(libOgg STATIC ${LIBOGG_SOURCES})
 # target_include_directories(libOgg PRIVATE ${CMAKE_SOURCE_DIR})
 # target_include_directories(libOgg PUBLIC
-#   ${OHNET_PATH}
-#   ${THIRDPARTY_HEADERS}
-#   ${CMAKE_BINARY_DIR}
-#   "${CMAKE_BINARY_DIR}/Generated"
+# ${OHNET_PATH}/include/ohnet
+# ${THIRDPARTY_HEADERS}
+# ${CMAKE_BINARY_DIR}
+# "${CMAKE_BINARY_DIR}/Generated"
 # )
 # target_link_libraries(libOgg PUBLIC OGG)
 # target_compile_definitions(libOgg PUBLIC ${ENDIANNESS})
-
 set(CODECFLAC_SOURCES
   OpenHome/Media/Codec/Flac.cpp
 
@@ -349,7 +348,7 @@ set(CODECFLAC_SOURCES
 add_library(CodecFlac STATIC ${CODECFLAC_SOURCES})
 target_include_directories(CodecFlac PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecFlac PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -359,6 +358,7 @@ target_compile_definitions(CodecFlac PUBLIC ${ENDIANNESS})
 
 set(CODECALACAPPLEBASE_SOURCES
   OpenHome/Media/Codec/AlacAppleBase.cpp
+
   # thirdparty/apple_alac/codec/ag_dec.c
   # thirdparty/apple_alac/codec/ALACDecoder.cpp
   # thirdparty/apple_alac/codec/ALACBitUtilities.c
@@ -370,7 +370,7 @@ set(CODECALACAPPLEBASE_SOURCES
 add_library(CodecAlacAppleBase STATIC ${CODECALACAPPLEBASE_SOURCES})
 target_include_directories(CodecAlacAppleBase PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecAlacAppleBase PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -385,7 +385,7 @@ set(CODECALACAPPLE_SOURCES
 add_library(CodecAlacApple STATIC ${CODECALACAPPLE_SOURCES})
 target_include_directories(CodecAlacApple PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecAlacApple PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -394,81 +394,80 @@ target_link_libraries(CodecAlacApple PUBLIC CodecAlacAppleBase ohNet)
 target_compile_definitions(CodecAlacApple PUBLIC ${ENDIANNESS})
 
 # set(CODECAACFDK_SOURCES
-#   thirdparty/fdk-aac/libAACdec/src/aacdec_drc.cpp
-#   thirdparty/fdk-aac/libAACdec/src/aacdec_hcr_bit.cpp
-#   thirdparty/fdk-aac/libAACdec/src/aacdec_hcr.cpp
-#   thirdparty/fdk-aac/libAACdec/src/aacdec_hcrs.cpp
-#   thirdparty/fdk-aac/libAACdec/src/aacdecoder.cpp
-#   thirdparty/fdk-aac/libAACdec/src/aacdecoder_lib.cpp
-#   thirdparty/fdk-aac/libAACdec/src/aacdec_pns.cpp
-#   thirdparty/fdk-aac/libAACdec/src/aacdec_tns.cpp
-#   thirdparty/fdk-aac/libAACdec/src/aac_ram.cpp
-#   thirdparty/fdk-aac/libAACdec/src/aac_rom.cpp
-#   thirdparty/fdk-aac/libAACdec/src/block.cpp
-#   thirdparty/fdk-aac/libAACdec/src/channel.cpp
-#   thirdparty/fdk-aac/libAACdec/src/channelinfo.cpp
-#   thirdparty/fdk-aac/libAACdec/src/conceal.cpp
-#   thirdparty/fdk-aac/libAACdec/src/ldfiltbank.cpp
-#   thirdparty/fdk-aac/libAACdec/src/pulsedata.cpp
-#   thirdparty/fdk-aac/libAACdec/src/rvlcbit.cpp
-#   thirdparty/fdk-aac/libAACdec/src/rvlcconceal.cpp
-#   thirdparty/fdk-aac/libAACdec/src/rvlc.cpp
-#   thirdparty/fdk-aac/libAACdec/src/stereo.cpp
-#   thirdparty/fdk-aac/libFDK/src/autocorr2nd.cpp
-#   thirdparty/fdk-aac/libFDK/src/dct.cpp
-#   thirdparty/fdk-aac/libFDK/src/FDK_bitbuffer.cpp
-#   thirdparty/fdk-aac/libFDK/src/FDK_core.cpp
-#   thirdparty/fdk-aac/libFDK/src/FDK_crc.cpp
-#   thirdparty/fdk-aac/libFDK/src/FDK_hybrid.cpp
-#   thirdparty/fdk-aac/libFDK/src/FDK_tools_rom.cpp
-#   thirdparty/fdk-aac/libFDK/src/FDK_trigFcts.cpp
-#   thirdparty/fdk-aac/libFDK/src/fft.cpp
-#   thirdparty/fdk-aac/libFDK/src/fft_rad2.cpp
-#   thirdparty/fdk-aac/libFDK/src/fixpoint_math.cpp
-#   thirdparty/fdk-aac/libFDK/src/mdct.cpp
-#   thirdparty/fdk-aac/libFDK/src/qmf.cpp
-#   thirdparty/fdk-aac/libFDK/src/scale.cpp
-#   thirdparty/fdk-aac/libMpegTPDec/src/tpdec_adif.cpp
-#   thirdparty/fdk-aac/libMpegTPDec/src/tpdec_adts.cpp
-#   thirdparty/fdk-aac/libMpegTPDec/src/tpdec_asc.cpp
-#   thirdparty/fdk-aac/libMpegTPDec/src/tpdec_drm.cpp
-#   thirdparty/fdk-aac/libMpegTPDec/src/tpdec_latm.cpp
-#   thirdparty/fdk-aac/libMpegTPDec/src/tpdec_lib.cpp
-#   thirdparty/fdk-aac/libPCMutils/src/limiter.cpp
-#   thirdparty/fdk-aac/libPCMutils/src/pcmutils_lib.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/env_calc.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/env_dec.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/env_extr.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/huff_dec.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/lpp_tran.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/psbitdec.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/psdec.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/psdec_hybrid.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/sbr_crc.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/sbr_deb.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/sbr_dec.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/sbrdec_drc.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/sbrdec_freq_sca.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/sbrdecoder.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/sbr_ram.cpp
-#   thirdparty/fdk-aac/libSBRdec/src/sbr_rom.cpp
-#   thirdparty/fdk-aac/libSYS/src/cmdl_parser.cpp
-#   thirdparty/fdk-aac/libSYS/src/conv_string.cpp
-#   thirdparty/fdk-aac/libSYS/src/genericStds.cpp
-#   thirdparty/fdk-aac/libSYS/src/wav_file.cpp
+# thirdparty/fdk-aac/libAACdec/src/aacdec_drc.cpp
+# thirdparty/fdk-aac/libAACdec/src/aacdec_hcr_bit.cpp
+# thirdparty/fdk-aac/libAACdec/src/aacdec_hcr.cpp
+# thirdparty/fdk-aac/libAACdec/src/aacdec_hcrs.cpp
+# thirdparty/fdk-aac/libAACdec/src/aacdecoder.cpp
+# thirdparty/fdk-aac/libAACdec/src/aacdecoder_lib.cpp
+# thirdparty/fdk-aac/libAACdec/src/aacdec_pns.cpp
+# thirdparty/fdk-aac/libAACdec/src/aacdec_tns.cpp
+# thirdparty/fdk-aac/libAACdec/src/aac_ram.cpp
+# thirdparty/fdk-aac/libAACdec/src/aac_rom.cpp
+# thirdparty/fdk-aac/libAACdec/src/block.cpp
+# thirdparty/fdk-aac/libAACdec/src/channel.cpp
+# thirdparty/fdk-aac/libAACdec/src/channelinfo.cpp
+# thirdparty/fdk-aac/libAACdec/src/conceal.cpp
+# thirdparty/fdk-aac/libAACdec/src/ldfiltbank.cpp
+# thirdparty/fdk-aac/libAACdec/src/pulsedata.cpp
+# thirdparty/fdk-aac/libAACdec/src/rvlcbit.cpp
+# thirdparty/fdk-aac/libAACdec/src/rvlcconceal.cpp
+# thirdparty/fdk-aac/libAACdec/src/rvlc.cpp
+# thirdparty/fdk-aac/libAACdec/src/stereo.cpp
+# thirdparty/fdk-aac/libFDK/src/autocorr2nd.cpp
+# thirdparty/fdk-aac/libFDK/src/dct.cpp
+# thirdparty/fdk-aac/libFDK/src/FDK_bitbuffer.cpp
+# thirdparty/fdk-aac/libFDK/src/FDK_core.cpp
+# thirdparty/fdk-aac/libFDK/src/FDK_crc.cpp
+# thirdparty/fdk-aac/libFDK/src/FDK_hybrid.cpp
+# thirdparty/fdk-aac/libFDK/src/FDK_tools_rom.cpp
+# thirdparty/fdk-aac/libFDK/src/FDK_trigFcts.cpp
+# thirdparty/fdk-aac/libFDK/src/fft.cpp
+# thirdparty/fdk-aac/libFDK/src/fft_rad2.cpp
+# thirdparty/fdk-aac/libFDK/src/fixpoint_math.cpp
+# thirdparty/fdk-aac/libFDK/src/mdct.cpp
+# thirdparty/fdk-aac/libFDK/src/qmf.cpp
+# thirdparty/fdk-aac/libFDK/src/scale.cpp
+# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_adif.cpp
+# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_adts.cpp
+# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_asc.cpp
+# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_drm.cpp
+# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_latm.cpp
+# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_lib.cpp
+# thirdparty/fdk-aac/libPCMutils/src/limiter.cpp
+# thirdparty/fdk-aac/libPCMutils/src/pcmutils_lib.cpp
+# thirdparty/fdk-aac/libSBRdec/src/env_calc.cpp
+# thirdparty/fdk-aac/libSBRdec/src/env_dec.cpp
+# thirdparty/fdk-aac/libSBRdec/src/env_extr.cpp
+# thirdparty/fdk-aac/libSBRdec/src/huff_dec.cpp
+# thirdparty/fdk-aac/libSBRdec/src/lpp_tran.cpp
+# thirdparty/fdk-aac/libSBRdec/src/psbitdec.cpp
+# thirdparty/fdk-aac/libSBRdec/src/psdec.cpp
+# thirdparty/fdk-aac/libSBRdec/src/psdec_hybrid.cpp
+# thirdparty/fdk-aac/libSBRdec/src/sbr_crc.cpp
+# thirdparty/fdk-aac/libSBRdec/src/sbr_deb.cpp
+# thirdparty/fdk-aac/libSBRdec/src/sbr_dec.cpp
+# thirdparty/fdk-aac/libSBRdec/src/sbrdec_drc.cpp
+# thirdparty/fdk-aac/libSBRdec/src/sbrdec_freq_sca.cpp
+# thirdparty/fdk-aac/libSBRdec/src/sbrdecoder.cpp
+# thirdparty/fdk-aac/libSBRdec/src/sbr_ram.cpp
+# thirdparty/fdk-aac/libSBRdec/src/sbr_rom.cpp
+# thirdparty/fdk-aac/libSYS/src/cmdl_parser.cpp
+# thirdparty/fdk-aac/libSYS/src/conv_string.cpp
+# thirdparty/fdk-aac/libSYS/src/genericStds.cpp
+# thirdparty/fdk-aac/libSYS/src/wav_file.cpp
 # )
 
 # add_library(CodecAacFdk STATIC ${CODECAACFDK_SOURCES})
 # target_include_directories(CodecAacFdk PRIVATE ${CMAKE_SOURCE_DIR})
 # target_include_directories(CodecAacFdk PUBLIC
-#   ${OHNET_PATH}
-#   ${THIRDPARTY_HEADERS}
-#   ${CMAKE_BINARY_DIR}
-#   "${CMAKE_BINARY_DIR}/Generated"
+# ${OHNET_PATH}/include/ohnet
+# ${THIRDPARTY_HEADERS}
+# ${CMAKE_BINARY_DIR}
+# "${CMAKE_BINARY_DIR}/Generated"
 # )
 # target_link_libraries(CodecAacFdk PUBLIC AAC_FDK ohNet)
 # target_compile_definitions(CodecAacFdk PUBLIC ${ENDIANNESS})
-
 set(CODECAACFDKBASE_SOURCES
   OpenHome/Media/Codec/AacFdkBase.cpp
 )
@@ -476,7 +475,7 @@ set(CODECAACFDKBASE_SOURCES
 add_library(CodecAacFdkBase STATIC ${CODECAACFDKBASE_SOURCES})
 target_include_directories(CodecAacFdkBase PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecAacFdkBase PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -491,7 +490,7 @@ set(CODECAACFDKMP4_SOURCES
 add_library(CodecAacFdkMp4 STATIC ${CODECAACFDKMP4_SOURCES})
 target_include_directories(CodecAacFdkMp4 PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecAacFdkMp4 PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -506,7 +505,7 @@ set(CODECAACFDKADTS_SOURCES
 add_library(CodecAacFdkAdts STATIC ${CODECAACFDKADTS_SOURCES})
 target_include_directories(CodecAacFdkAdts PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecAacFdkAdts PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -516,6 +515,7 @@ target_compile_definitions(CodecAacFdkAdts PUBLIC ${ENDIANNESS})
 
 set(CODECMP3_SOURCES
   OpenHome/Media/Codec/Mp3.cpp
+
   # thirdparty/libmad-0.15.1b/version.c
   # thirdparty/libmad-0.15.1b/fixed.c
   # thirdparty/libmad-0.15.1b/bit.c
@@ -532,7 +532,7 @@ set(CODECMP3_SOURCES
 add_library(CodecMp3 STATIC ${CODECMP3_SOURCES})
 target_include_directories(CodecMp3 PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecMp3 PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -542,6 +542,7 @@ target_compile_definitions(CodecMp3 PUBLIC ${ENDIANNESS})
 
 set(CODECVORBIS_SOURCES
   OpenHome/Media/Codec/Vorbis.cpp
+
   # thirdparty/Tremor/block.c
   # thirdparty/Tremor/codebook.c
   # thirdparty/Tremor/floor0.c
@@ -560,7 +561,7 @@ set(CODECVORBIS_SOURCES
 add_library(CodecVorbis STATIC ${CODECVORBIS_SOURCES})
 target_include_directories(CodecVorbis PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecVorbis PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -576,7 +577,7 @@ set(WEBAPPFRAMEWORK_SOURCES
 add_library(WebAppFramework STATIC ${WEBAPPFRAMEWORK_SOURCES})
 target_include_directories(WebAppFramework PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(WebAppFramework PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -591,7 +592,7 @@ set(WEBAPPFRAMEWORKTESTUTILS_SOURCES
 add_library(WebAppFrameworkTestUtils STATIC ${WEBAPPFRAMEWORKTESTUTILS_SOURCES})
 target_include_directories(WebAppFrameworkTestUtils PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(WebAppFrameworkTestUtils PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -608,7 +609,7 @@ set(CONFIGUI_SOURCES
 add_library(ConfigUi STATIC ${CONFIGUI_SOURCES})
 target_include_directories(ConfigUi PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(ConfigUi PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -623,7 +624,7 @@ set(CONFIGUITESTUTILS_SOURCES
 add_library(ConfigUiTestUtils STATIC ${CONFIGUITESTUTILS_SOURCES})
 target_include_directories(ConfigUiTestUtils PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(ConfigUiTestUtils PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -707,7 +708,7 @@ set(OHMEDIAPLAYERTESTUTILS_SOURCES
 add_library(ohMediaPlayerTestUtils STATIC ${OHMEDIAPLAYERTESTUTILS_SOURCES})
 target_include_directories(ohMediaPlayerTestUtils PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(ohMediaPlayerTestUtils PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -722,7 +723,7 @@ set(TESTSHELL_SOURCES
 add_executable(TestShell ${TESTSHELL_SOURCES})
 target_include_directories(TestShell PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestShell PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -737,7 +738,7 @@ set(TESTMSG_SOURCES
 add_executable(TestMsg ${TESTMSG_SOURCES})
 target_include_directories(TestMsg PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestMsg PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -752,7 +753,7 @@ set(TESTSTARVATIONRAMPER_SOURCES
 add_executable(TestStarvationRamper ${TESTSTARVATIONRAMPER_SOURCES})
 target_include_directories(TestStarvationRamper PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestStarvationRamper PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -767,7 +768,7 @@ set(TESTSTREAMVALIDATOR_SOURCES
 add_executable(TestStreamValidator ${TESTSTREAMVALIDATOR_SOURCES})
 target_include_directories(TestStreamValidator PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestStreamValidator PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -782,7 +783,7 @@ set(TESTSEEKER_SOURCES
 add_executable(TestSeeker ${TESTSEEKER_SOURCES})
 target_include_directories(TestSeeker PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestSeeker PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -797,7 +798,7 @@ set(TESTSKIPPER_SOURCES
 add_executable(TestSkipper ${TESTSKIPPER_SOURCES})
 target_include_directories(TestSkipper PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestSkipper PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -812,7 +813,7 @@ set(TESTSTOPPER_SOURCES
 add_executable(TestStopper ${TESTSTOPPER_SOURCES})
 target_include_directories(TestStopper PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestStopper PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -827,7 +828,7 @@ set(TESTWAITER_SOURCES
 add_executable(TestWaiter ${TESTWAITER_SOURCES})
 target_include_directories(TestWaiter PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestWaiter PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -842,7 +843,7 @@ set(TESTSUPPLY_SOURCES
 add_executable(TestSupply ${TESTSUPPLY_SOURCES})
 target_include_directories(TestSupply PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestSupply PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -857,7 +858,7 @@ set(TESTSUPPLYAGGREGATOR_SOURCES
 add_executable(TestSupplyAggregator ${TESTSUPPLYAGGREGATOR_SOURCES})
 target_include_directories(TestSupplyAggregator PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestSupplyAggregator PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -872,7 +873,7 @@ set(TESTAUDIORESERVOIR_SOURCES
 add_executable(TestAudioReservoir ${TESTAUDIORESERVOIR_SOURCES})
 target_include_directories(TestAudioReservoir PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestAudioReservoir PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -887,7 +888,7 @@ set(TESTVARIABLEDELAY_SOURCES
 add_executable(TestVariableDelay ${TESTVARIABLEDELAY_SOURCES})
 target_include_directories(TestVariableDelay PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestVariableDelay PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -902,7 +903,7 @@ set(TESTTRACKINSPECTOR_SOURCES
 add_executable(TestTrackInspector ${TESTTRACKINSPECTOR_SOURCES})
 target_include_directories(TestTrackInspector PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestTrackInspector PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -917,7 +918,7 @@ set(TESTRAMPER_SOURCES
 add_executable(TestRamper ${TESTRAMPER_SOURCES})
 target_include_directories(TestRamper PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestRamper PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -932,7 +933,7 @@ set(TESTFLYWHEELRAMPERMANUAL_SOURCES
 add_executable(TestFlywheelRamperManual ${TESTFLYWHEELRAMPERMANUAL_SOURCES})
 target_include_directories(TestFlywheelRamperManual PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestFlywheelRamperManual PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -947,7 +948,7 @@ set(TESTFLYWHEELRAMPER_SOURCES
 add_executable(TestFlywheelRamper ${TESTFLYWHEELRAMPER_SOURCES})
 target_include_directories(TestFlywheelRamper PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestFlywheelRamper PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -962,7 +963,7 @@ set(TESTREPORTER_SOURCES
 add_executable(TestReporter ${TESTREPORTER_SOURCES})
 target_include_directories(TestReporter PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestReporter PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -977,7 +978,7 @@ set(TESTSPOTIFYREPORTER_SOURCES
 add_executable(TestSpotifyReporter ${TESTSPOTIFYREPORTER_SOURCES})
 target_include_directories(TestSpotifyReporter PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestSpotifyReporter PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -992,7 +993,7 @@ set(TESTPREDRIVER_SOURCES
 add_executable(TestPreDriver ${TESTPREDRIVER_SOURCES})
 target_include_directories(TestPreDriver PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestPreDriver PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1007,7 +1008,7 @@ set(TESTVOLUMERAMPER_SOURCES
 add_executable(TestVolumeRamper ${TESTVOLUMERAMPER_SOURCES})
 target_include_directories(TestVolumeRamper PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestVolumeRamper PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1022,7 +1023,7 @@ set(TESTMUTER_SOURCES
 add_executable(TestMuter ${TESTMUTER_SOURCES})
 target_include_directories(TestMuter PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestMuter PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1037,7 +1038,7 @@ set(TESTMUTERVOLUME_SOURCES
 add_executable(TestMuterVolume ${TESTMUTERVOLUME_SOURCES})
 target_include_directories(TestMuterVolume PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestMuterVolume PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1052,7 +1053,7 @@ set(TESTDRAINER_SOURCES
 add_executable(TestDrainer ${TESTDRAINER_SOURCES})
 target_include_directories(TestDrainer PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestDrainer PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1067,7 +1068,7 @@ set(TESTCONTENTPROCESSOR_SOURCES
 add_executable(TestContentProcessor ${TESTCONTENTPROCESSOR_SOURCES})
 target_include_directories(TestContentProcessor PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestContentProcessor PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1082,7 +1083,7 @@ set(TESTPIPELINE_SOURCES
 add_executable(TestPipeline ${TESTPIPELINE_SOURCES})
 target_include_directories(TestPipeline PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestPipeline PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1097,7 +1098,7 @@ set(TESTPIPELINECONFIG_SOURCES
 add_executable(TestPipelineConfig ${TESTPIPELINECONFIG_SOURCES})
 target_include_directories(TestPipelineConfig PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestPipelineConfig PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1112,7 +1113,7 @@ set(TESTSTORE_SOURCES
 add_executable(TestStore ${TESTSTORE_SOURCES})
 target_include_directories(TestStore PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestStore PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1127,7 +1128,7 @@ set(TESTPROTOCOLHLS_SOURCES
 add_executable(TestProtocolHls ${TESTPROTOCOLHLS_SOURCES})
 target_include_directories(TestProtocolHls PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestProtocolHls PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1142,7 +1143,7 @@ set(TESTPROTOCOLHTTP_SOURCES
 add_executable(TestProtocolHttp ${TESTPROTOCOLHTTP_SOURCES})
 target_include_directories(TestProtocolHttp PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestProtocolHttp PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1157,7 +1158,7 @@ set(TESTCODEC_SOURCES
 add_executable(TestCodec ${TESTCODEC_SOURCES})
 target_include_directories(TestCodec PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestCodec PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1172,7 +1173,7 @@ set(TESTCODECINTERACTIVE_SOURCES
 add_executable(TestCodecInteractive ${TESTCODECINTERACTIVE_SOURCES})
 target_include_directories(TestCodecInteractive PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestCodecInteractive PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1187,7 +1188,7 @@ set(TESTCODECCONTROLLER_SOURCES
 add_executable(TestCodecController ${TESTCODECCONTROLLER_SOURCES})
 target_include_directories(TestCodecController PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestCodecController PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1202,7 +1203,7 @@ set(TESTDECODEDAUDIOAGGREGATOR_SOURCES
 add_executable(TestDecodedAudioAggregator ${TESTDECODEDAUDIOAGGREGATOR_SOURCES})
 target_include_directories(TestDecodedAudioAggregator PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestDecodedAudioAggregator PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1217,7 +1218,7 @@ set(TESTCONTAINER_SOURCES
 add_executable(TestContainer ${TESTCONTAINER_SOURCES})
 target_include_directories(TestContainer PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestContainer PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1232,7 +1233,7 @@ set(TESTSILENCER_SOURCES
 add_executable(TestSilencer ${TESTSILENCER_SOURCES})
 target_include_directories(TestSilencer PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestSilencer PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1247,7 +1248,7 @@ set(TESTIDPROVIDER_SOURCES
 add_executable(TestIdProvider ${TESTIDPROVIDER_SOURCES})
 target_include_directories(TestIdProvider PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestIdProvider PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1262,7 +1263,7 @@ set(TESTFILLER_SOURCES
 add_executable(TestFiller ${TESTFILLER_SOURCES})
 target_include_directories(TestFiller PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestFiller PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1277,7 +1278,7 @@ set(TESTTONEGENERATOR_SOURCES
 add_executable(TestToneGenerator ${TESTTONEGENERATOR_SOURCES})
 target_include_directories(TestToneGenerator PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestToneGenerator PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1292,7 +1293,7 @@ set(TESTMUTEMANAGER_SOURCES
 add_executable(TestMuteManager ${TESTMUTEMANAGER_SOURCES})
 target_include_directories(TestMuteManager PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestMuteManager PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1307,7 +1308,7 @@ set(TESTREWINDER_SOURCES
 add_executable(TestRewinder ${TESTREWINDER_SOURCES})
 target_include_directories(TestRewinder PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestRewinder PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1322,7 +1323,7 @@ set(TESTUDPSERVER_SOURCES
 add_executable(TestUdpServer ${TESTUDPSERVER_SOURCES})
 target_include_directories(TestUdpServer PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestUdpServer PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1337,7 +1338,7 @@ set(TESTUPNPERRORS_SOURCES
 add_executable(TestUpnpErrors ${TESTUPNPERRORS_SOURCES})
 target_include_directories(TestUpnpErrors PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestUpnpErrors PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1352,7 +1353,7 @@ set(TESTTRACKDATABASE_SOURCES
 add_executable(TestTrackDatabase ${TESTTRACKDATABASE_SOURCES})
 target_include_directories(TestTrackDatabase PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestTrackDatabase PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1367,7 +1368,7 @@ set(TESTURIPROVIDERREPEATER_SOURCES
 add_executable(TestUriProviderRepeater ${TESTURIPROVIDERREPEATER_SOURCES})
 target_include_directories(TestUriProviderRepeater PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestUriProviderRepeater PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1382,7 +1383,7 @@ set(TESTMEDIAPLAYER_SOURCES
 add_executable(TestMediaPlayer ${TESTMEDIAPLAYER_SOURCES})
 target_include_directories(TestMediaPlayer PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestMediaPlayer PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1397,7 +1398,7 @@ set(TESTCONFIGMANAGER_SOURCES
 add_executable(TestConfigManager ${TESTCONFIGMANAGER_SOURCES})
 target_include_directories(TestConfigManager PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestConfigManager PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1412,7 +1413,7 @@ set(TESTPOWERMANAGER_SOURCES
 add_executable(TestPowerManager ${TESTPOWERMANAGER_SOURCES})
 target_include_directories(TestPowerManager PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestPowerManager PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1427,7 +1428,7 @@ set(TESTSSL_SOURCES
 add_executable(TestSsl ${TESTSSL_SOURCES})
 target_include_directories(TestSsl PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestSsl PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1442,7 +1443,7 @@ set(TESTSOCKET_SOURCES
 add_executable(TestSocket ${TESTSOCKET_SOURCES})
 target_include_directories(TestSocket PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestSocket PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1457,7 +1458,7 @@ set(TESTCREDENTIALS_SOURCES
 add_executable(TestCredentials ${TESTCREDENTIALS_SOURCES})
 target_include_directories(TestCredentials PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestCredentials PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1472,7 +1473,7 @@ set(TESTHTTPS_SOURCES
 add_executable(TestHttps ${TESTHTTPS_SOURCES})
 target_include_directories(TestHttps PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestHttps PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1487,7 +1488,7 @@ set(TESTFRIENDLYNAMEMANAGER_SOURCES
 add_executable(TestFriendlyNameManager ${TESTFRIENDLYNAMEMANAGER_SOURCES})
 target_include_directories(TestFriendlyNameManager PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestFriendlyNameManager PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1502,7 +1503,7 @@ set(TESTTIDAL_SOURCES
 add_executable(TestTidal ${TESTTIDAL_SOURCES})
 target_include_directories(TestTidal PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestTidal PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1517,7 +1518,7 @@ set(TESTJSON_SOURCES
 add_executable(TestJson ${TESTJSON_SOURCES})
 target_include_directories(TestJson PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestJson PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1532,7 +1533,7 @@ set(TESTTHREADPOOL_SOURCES
 add_executable(TestThreadPool ${TESTTHREADPOOL_SOURCES})
 target_include_directories(TestThreadPool PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestThreadPool PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1547,7 +1548,7 @@ set(TESTQOBUZ_SOURCES
 add_executable(TestQobuz ${TESTQOBUZ_SOURCES})
 target_include_directories(TestQobuz PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestQobuz PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1562,7 +1563,7 @@ set(TESTNTPCLIENT_SOURCES
 add_executable(TestNtpClient ${TESTNTPCLIENT_SOURCES})
 target_include_directories(TestNtpClient PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestNtpClient PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1577,7 +1578,7 @@ set(TESTWEBAPPFRAMEWORK_SOURCES
 add_executable(TestWebAppFramework ${TESTWEBAPPFRAMEWORK_SOURCES})
 target_include_directories(TestWebAppFramework PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestWebAppFramework PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1592,7 +1593,7 @@ set(TESTCONFIGUI_SOURCES
 add_executable(TestConfigUi ${TESTCONFIGUI_SOURCES})
 target_include_directories(TestConfigUi PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestConfigUi PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1607,7 +1608,7 @@ set(TESTRAOP_SOURCES
 add_executable(TestRaop ${TESTRAOP_SOURCES})
 target_include_directories(TestRaop PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestRaop PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1622,7 +1623,7 @@ set(TESTVOLUMEMANAGER_SOURCES
 add_executable(TestVolumeManager ${TESTVOLUMEMANAGER_SOURCES})
 target_include_directories(TestVolumeManager PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestVolumeManager PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1637,7 +1638,7 @@ set(TESTPINS_SOURCES
 add_executable(TestPins ${TESTPINS_SOURCES})
 target_include_directories(TestPins PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestPins PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1652,7 +1653,7 @@ set(TESTSENDERQUEUE_SOURCES
 add_executable(TestSenderQueue ${TESTSENDERQUEUE_SOURCES})
 target_include_directories(TestSenderQueue PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestSenderQueue PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1667,7 +1668,7 @@ set(TESTDVODP_SOURCES
 add_executable(TestDvOdp ${TESTDVODP_SOURCES})
 target_include_directories(TestDvOdp PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestDvOdp PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1682,7 +1683,7 @@ set(TESTCPDEVICELISTODP_SOURCES
 add_executable(TestCpDeviceListOdp ${TESTCPDEVICELISTODP_SOURCES})
 target_include_directories(TestCpDeviceListOdp PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(TestCpDeviceListOdp PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
@@ -1699,7 +1700,7 @@ set(SCDSENDER_SOURCES
 add_library(ScdSender STATIC ${SCDSENDER_SOURCES})
 target_include_directories(ScdSender PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(ScdSender PUBLIC
-  ${OHNET_PATH}
+  ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
