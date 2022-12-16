@@ -313,36 +313,29 @@ target_include_directories(CodecAiff PUBLIC
 target_link_libraries(CodecAiff PUBLIC CodecAiffBase ohNet)
 target_compile_definitions(CodecAiff PUBLIC ${ENDIANNESS})
 
-# set(LIBOGG_SOURCES
-# thirdparty/libogg/src/bitwise.c
-# thirdparty/libogg/src/framing.c
-# )
+add_library(libOgg INTERFACE)
+target_link_libraries(libOgg INTERFACE
+  ${PRECOMPILED_3RD_PARTY}/libogg/src/bitwise.c.91.o
+  ${PRECOMPILED_3RD_PARTY}/libogg/src/framing.c.91.o
+)
+target_compile_definitions(libOgg INTERFACE ${ENDIANNESS})
 
-# add_library(libOgg STATIC ${LIBOGG_SOURCES})
-# target_include_directories(libOgg PRIVATE ${CMAKE_SOURCE_DIR})
-# target_include_directories(libOgg PUBLIC
-# ${OHNET_PATH}/include/ohnet
-# ${THIRDPARTY_HEADERS}
-# ${CMAKE_BINARY_DIR}
-# "${CMAKE_BINARY_DIR}/Generated"
-# )
-# target_link_libraries(libOgg PUBLIC OGG)
-# target_compile_definitions(libOgg PUBLIC ${ENDIANNESS})
 set(CODECFLAC_SOURCES
   OpenHome/Media/Codec/Flac.cpp
-
-  # thirdparty/flac-1.2.1/src/libFLAC/bitreader.c
-  # thirdparty/flac-1.2.1/src/libFLAC/bitmath.c
-  # thirdparty/flac-1.2.1/src/libFLAC/cpu.c
-  # thirdparty/flac-1.2.1/src/libFLAC/crc.c
-  # thirdparty/flac-1.2.1/src/libFLAC/fixed.c
-  # thirdparty/flac-1.2.1/src/libFLAC/format.c
-  # thirdparty/flac-1.2.1/src/libFLAC/lpc.c
-  # thirdparty/flac-1.2.1/src/libFLAC/md5.c
-  # thirdparty/flac-1.2.1/src/libFLAC/memory.c
-  # thirdparty/flac-1.2.1/src/libFLAC/stream_decoder.c
-  # thirdparty/flac-1.2.1/src/libFLAC/ogg_decoder_aspect.c
-  # thirdparty/flac-1.2.1/src/libFLAC/ogg_mapping.c
+)
+set(CODECFLAC_OBJS
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/bitreader.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/bitmath.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/cpu.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/crc.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/fixed.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/format.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/lpc.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/md5.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/memory.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/stream_decoder.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/ogg_decoder_aspect.c.92.o
+  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/ogg_mapping.c.92.o
 )
 
 add_library(CodecFlac STATIC ${CODECFLAC_SOURCES})
@@ -353,18 +346,12 @@ target_include_directories(CodecFlac PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(CodecFlac PUBLIC FLAC OGG libOgg ohNet)
+target_link_libraries(CodecFlac PUBLIC libOgg ohNet)
+target_link_libraries(CodecFlac PUBLIC ${CODECFLAC_OBJS})
 target_compile_definitions(CodecFlac PUBLIC ${ENDIANNESS})
 
 set(CODECALACAPPLEBASE_SOURCES
   OpenHome/Media/Codec/AlacAppleBase.cpp
-
-  # thirdparty/apple_alac/codec/ag_dec.c
-  # thirdparty/apple_alac/codec/ALACDecoder.cpp
-  # thirdparty/apple_alac/codec/ALACBitUtilities.c
-  # thirdparty/apple_alac/codec/dp_dec.c
-  # thirdparty/apple_alac/codec/EndianPortable.c
-  # thirdparty/apple_alac/codec/matrix_dec.c
 )
 
 add_library(CodecAlacAppleBase STATIC ${CODECALACAPPLEBASE_SOURCES})
@@ -375,7 +362,15 @@ target_include_directories(CodecAlacAppleBase PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(CodecAlacAppleBase PUBLIC ALAC_APPLE ohNet ohMediaPlayer)
+target_link_libraries(CodecAlacAppleBase PUBLIC ohNet ohMediaPlayer)
+target_link_libraries(CodecAlacAppleBase PUBLIC
+  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/ag_dec.c.93.o
+  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/ALACDecoder.cpp.93.o
+  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/ALACBitUtilities.c.93.o
+  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/dp_dec.c.93.o
+  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/EndianPortable.c.93.o
+  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/matrix_dec.c.93.o
+)
 target_compile_definitions(CodecAlacAppleBase PUBLIC ${ENDIANNESS})
 
 set(CODECALACAPPLE_SOURCES
@@ -393,72 +388,8 @@ target_include_directories(CodecAlacApple PUBLIC
 target_link_libraries(CodecAlacApple PUBLIC CodecAlacAppleBase ohNet)
 target_compile_definitions(CodecAlacApple PUBLIC ${ENDIANNESS})
 
-# set(CODECAACFDK_SOURCES
-# thirdparty/fdk-aac/libAACdec/src/aacdec_drc.cpp
-# thirdparty/fdk-aac/libAACdec/src/aacdec_hcr_bit.cpp
-# thirdparty/fdk-aac/libAACdec/src/aacdec_hcr.cpp
-# thirdparty/fdk-aac/libAACdec/src/aacdec_hcrs.cpp
-# thirdparty/fdk-aac/libAACdec/src/aacdecoder.cpp
-# thirdparty/fdk-aac/libAACdec/src/aacdecoder_lib.cpp
-# thirdparty/fdk-aac/libAACdec/src/aacdec_pns.cpp
-# thirdparty/fdk-aac/libAACdec/src/aacdec_tns.cpp
-# thirdparty/fdk-aac/libAACdec/src/aac_ram.cpp
-# thirdparty/fdk-aac/libAACdec/src/aac_rom.cpp
-# thirdparty/fdk-aac/libAACdec/src/block.cpp
-# thirdparty/fdk-aac/libAACdec/src/channel.cpp
-# thirdparty/fdk-aac/libAACdec/src/channelinfo.cpp
-# thirdparty/fdk-aac/libAACdec/src/conceal.cpp
-# thirdparty/fdk-aac/libAACdec/src/ldfiltbank.cpp
-# thirdparty/fdk-aac/libAACdec/src/pulsedata.cpp
-# thirdparty/fdk-aac/libAACdec/src/rvlcbit.cpp
-# thirdparty/fdk-aac/libAACdec/src/rvlcconceal.cpp
-# thirdparty/fdk-aac/libAACdec/src/rvlc.cpp
-# thirdparty/fdk-aac/libAACdec/src/stereo.cpp
-# thirdparty/fdk-aac/libFDK/src/autocorr2nd.cpp
-# thirdparty/fdk-aac/libFDK/src/dct.cpp
-# thirdparty/fdk-aac/libFDK/src/FDK_bitbuffer.cpp
-# thirdparty/fdk-aac/libFDK/src/FDK_core.cpp
-# thirdparty/fdk-aac/libFDK/src/FDK_crc.cpp
-# thirdparty/fdk-aac/libFDK/src/FDK_hybrid.cpp
-# thirdparty/fdk-aac/libFDK/src/FDK_tools_rom.cpp
-# thirdparty/fdk-aac/libFDK/src/FDK_trigFcts.cpp
-# thirdparty/fdk-aac/libFDK/src/fft.cpp
-# thirdparty/fdk-aac/libFDK/src/fft_rad2.cpp
-# thirdparty/fdk-aac/libFDK/src/fixpoint_math.cpp
-# thirdparty/fdk-aac/libFDK/src/mdct.cpp
-# thirdparty/fdk-aac/libFDK/src/qmf.cpp
-# thirdparty/fdk-aac/libFDK/src/scale.cpp
-# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_adif.cpp
-# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_adts.cpp
-# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_asc.cpp
-# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_drm.cpp
-# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_latm.cpp
-# thirdparty/fdk-aac/libMpegTPDec/src/tpdec_lib.cpp
-# thirdparty/fdk-aac/libPCMutils/src/limiter.cpp
-# thirdparty/fdk-aac/libPCMutils/src/pcmutils_lib.cpp
-# thirdparty/fdk-aac/libSBRdec/src/env_calc.cpp
-# thirdparty/fdk-aac/libSBRdec/src/env_dec.cpp
-# thirdparty/fdk-aac/libSBRdec/src/env_extr.cpp
-# thirdparty/fdk-aac/libSBRdec/src/huff_dec.cpp
-# thirdparty/fdk-aac/libSBRdec/src/lpp_tran.cpp
-# thirdparty/fdk-aac/libSBRdec/src/psbitdec.cpp
-# thirdparty/fdk-aac/libSBRdec/src/psdec.cpp
-# thirdparty/fdk-aac/libSBRdec/src/psdec_hybrid.cpp
-# thirdparty/fdk-aac/libSBRdec/src/sbr_crc.cpp
-# thirdparty/fdk-aac/libSBRdec/src/sbr_deb.cpp
-# thirdparty/fdk-aac/libSBRdec/src/sbr_dec.cpp
-# thirdparty/fdk-aac/libSBRdec/src/sbrdec_drc.cpp
-# thirdparty/fdk-aac/libSBRdec/src/sbrdec_freq_sca.cpp
-# thirdparty/fdk-aac/libSBRdec/src/sbrdecoder.cpp
-# thirdparty/fdk-aac/libSBRdec/src/sbr_ram.cpp
-# thirdparty/fdk-aac/libSBRdec/src/sbr_rom.cpp
-# thirdparty/fdk-aac/libSYS/src/cmdl_parser.cpp
-# thirdparty/fdk-aac/libSYS/src/conv_string.cpp
-# thirdparty/fdk-aac/libSYS/src/genericStds.cpp
-# thirdparty/fdk-aac/libSYS/src/wav_file.cpp
-# )
+add_library(CodecAacFdk INTERFACE)
 
-# add_library(CodecAacFdk STATIC ${CODECAACFDK_SOURCES})
 # target_include_directories(CodecAacFdk PRIVATE ${CMAKE_SOURCE_DIR})
 # target_include_directories(CodecAacFdk PUBLIC
 # ${OHNET_PATH}/include/ohnet
@@ -466,8 +397,72 @@ target_compile_definitions(CodecAlacApple PUBLIC ${ENDIANNESS})
 # ${CMAKE_BINARY_DIR}
 # "${CMAKE_BINARY_DIR}/Generated"
 # )
-# target_link_libraries(CodecAacFdk PUBLIC AAC_FDK ohNet)
-# target_compile_definitions(CodecAacFdk PUBLIC ${ENDIANNESS})
+target_link_libraries(CodecAacFdk INTERFACE ohNet)
+target_link_libraries(CodecAacFdk INTERFACE
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_drc.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_hcr_bit.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_hcr.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_hcrs.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdecoder.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdecoder_lib.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_pns.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_tns.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aac_ram.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aac_rom.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/block.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/channel.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/channelinfo.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/conceal.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/ldfiltbank.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/pulsedata.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/rvlcbit.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/rvlcconceal.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/rvlc.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/stereo.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/autocorr2nd.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/dct.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_bitbuffer.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_core.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_crc.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_hybrid.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_tools_rom.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_trigFcts.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/fft.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/fft_rad2.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/fixpoint_math.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/mdct.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/qmf.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/scale.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_adif.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_adts.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_asc.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_drm.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_latm.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_lib.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libPCMutils/src/limiter.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libPCMutils/src/pcmutils_lib.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/env_calc.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/env_dec.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/env_extr.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/huff_dec.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/lpp_tran.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/psbitdec.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/psdec.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/psdec_hybrid.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbr_crc.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbr_deb.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbr_dec.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbrdec_drc.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbrdec_freq_sca.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbrdecoder.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbr_ram.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbr_rom.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSYS/src/cmdl_parser.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSYS/src/conv_string.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSYS/src/genericStds.cpp.95.o
+  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSYS/src/wav_file.cpp.95.o
+)
+target_compile_definitions(CodecAacFdk INTERFACE ${ENDIANNESS})
 set(CODECAACFDKBASE_SOURCES
   OpenHome/Media/Codec/AacFdkBase.cpp
 )
@@ -515,18 +510,6 @@ target_compile_definitions(CodecAacFdkAdts PUBLIC ${ENDIANNESS})
 
 set(CODECMP3_SOURCES
   OpenHome/Media/Codec/Mp3.cpp
-
-  # thirdparty/libmad-0.15.1b/version.c
-  # thirdparty/libmad-0.15.1b/fixed.c
-  # thirdparty/libmad-0.15.1b/bit.c
-  # thirdparty/libmad-0.15.1b/timer.c
-  # thirdparty/libmad-0.15.1b/stream.c
-  # thirdparty/libmad-0.15.1b/frame.c
-  # thirdparty/libmad-0.15.1b/synth.c
-  # thirdparty/libmad-0.15.1b/decoder.c
-  # thirdparty/libmad-0.15.1b/layer12.c
-  # thirdparty/libmad-0.15.1b/layer3.c
-  # thirdparty/libmad-0.15.1b/huffman.c
 )
 
 add_library(CodecMp3 STATIC ${CODECMP3_SOURCES})
@@ -537,25 +520,24 @@ target_include_directories(CodecMp3 PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(CodecMp3 PUBLIC MAD OHMEDIAPLAYER ohNet)
+target_link_libraries(CodecMp3 PUBLIC ohNet)
+target_link_libraries(CodecMp3 PUBLIC
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/version.c.99.o
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/fixed.c.99.o
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/bit.c.99.o
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/timer.c.99.o
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/stream.c.99.o
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/frame.c.99.o
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/synth.c.99.o
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/decoder.c.99.o
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/layer12.c.99.o
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/layer3.c.99.o
+  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/huffman.c.99.o
+)
 target_compile_definitions(CodecMp3 PUBLIC ${ENDIANNESS})
 
 set(CODECVORBIS_SOURCES
   OpenHome/Media/Codec/Vorbis.cpp
-
-  # thirdparty/Tremor/block.c
-  # thirdparty/Tremor/codebook.c
-  # thirdparty/Tremor/floor0.c
-  # thirdparty/Tremor/floor1.c
-  # thirdparty/Tremor/info.c
-  # thirdparty/Tremor/mapping0.c
-  # thirdparty/Tremor/mdct.c
-  # thirdparty/Tremor/registry.c
-  # thirdparty/Tremor/res012.c
-  # thirdparty/Tremor/sharedbook.c
-  # thirdparty/Tremor/synthesis.c
-  # thirdparty/Tremor/vorbisfile.c
-  # thirdparty/Tremor/window.c
 )
 
 add_library(CodecVorbis STATIC ${CODECVORBIS_SOURCES})
@@ -566,7 +548,22 @@ target_include_directories(CodecVorbis PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(CodecVorbis PUBLIC VORBIS OGG libOgg ohNet)
+target_link_libraries(CodecVorbis PUBLIC libOgg ohNet)
+target_link_libraries(CodecVorbis PUBLIC
+  ${PRECOMPILED_3RD_PARTY}/Tremor/block.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/codebook.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/floor0.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/floor1.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/info.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/mapping0.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/mdct.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/registry.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/res012.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/sharedbook.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/synthesis.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/vorbisfile.c.100.o
+  ${PRECOMPILED_3RD_PARTY}/Tremor/window.c.100.o
+)
 target_compile_definitions(CodecVorbis PUBLIC ${ENDIANNESS})
 
 set(WEBAPPFRAMEWORK_SOURCES
@@ -582,8 +579,15 @@ target_include_directories(WebAppFramework PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(WebAppFramework PUBLIC ohNetCore ohNet OHMEDIAPLAYER PLATFORM WebUiStatic)
+# target_link_libraries(WebAppFramework PUBLIC ohNetCore ohNet)
+target_link_libraries(WebAppFramework PUBLIC ohNet)
 target_compile_definitions(WebAppFramework PUBLIC ${ENDIANNESS})
+
+# Copy ConfigUi resources to 'build' and 'install/bin'.
+# file(
+#   COPY ${CMAKE_SOURCE_DIR}/OpenHome/Web/ConfigUi/res
+#   DESTINATION ${CMAKE_BINARY_DIR}
+# )
 
 set(WEBAPPFRAMEWORKTESTUTILS_SOURCES
   OpenHome/Web/Tests/TestWebAppFramework.cpp
@@ -597,7 +601,7 @@ target_include_directories(WebAppFrameworkTestUtils PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(WebAppFrameworkTestUtils PUBLIC WebAppFramework OHMEDIAPLAYER ohNet PLATFORM)
+target_link_libraries(WebAppFrameworkTestUtils PUBLIC WebAppFramework ohNet)
 target_compile_definitions(WebAppFrameworkTestUtils PUBLIC ${ENDIANNESS})
 
 set(CONFIGUI_SOURCES
@@ -614,7 +618,7 @@ target_include_directories(ConfigUi PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(ConfigUi PUBLIC WebAppFramework OHMEDIAPLAYER ohNet PLATFORM)
+target_link_libraries(ConfigUi PUBLIC WebAppFramework ohNet)
 target_compile_definitions(ConfigUi PUBLIC ${ENDIANNESS})
 
 set(CONFIGUITESTUTILS_SOURCES
@@ -629,7 +633,7 @@ target_include_directories(ConfigUiTestUtils PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(ConfigUiTestUtils PUBLIC ConfigUi WebAppFramework OHMEDIAPLAYER ohNet PLATFORM)
+target_link_libraries(ConfigUiTestUtils PUBLIC ConfigUi WebAppFramework ohNet)
 target_compile_definitions(ConfigUiTestUtils PUBLIC ${ENDIANNESS})
 
 set(OHMEDIAPLAYERTESTUTILS_SOURCES
@@ -713,7 +717,9 @@ target_include_directories(ohMediaPlayerTestUtils PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(ohMediaPlayerTestUtils PUBLIC ConfigUi WebAppFramework ohMediaPlayer WebAppFramework CodecFlac CodecWav CodecPcm CodecDsdDsf CodecDsdDff CodecDsdRaw CodecAlac CodecAlacApple CodecAifc CodecAiff CodecAacFdkAdts CodecAacFdkMp4 CodecMp3 CodecVorbis Odp TestFramework ohNet)
+
+# target_link_libraries(ohMediaPlayerTestUtils PUBLIC ConfigUi WebAppFramework ohMediaPlayer WebAppFramework CodecFlac CodecWav CodecPcm CodecDsdDsf CodecDsdDff CodecDsdRaw CodecAlac CodecAlacApple CodecAifc CodecAiff CodecAacFdkAdts CodecAacFdkMp4 CodecMp3 CodecVorbis Odp TestFramework ohNet)
+target_link_libraries(ohMediaPlayerTestUtils PUBLIC ConfigUi WebAppFramework ohMediaPlayer WebAppFramework CodecFlac CodecWav CodecPcm CodecDsdDsf CodecDsdDff CodecDsdRaw CodecAlacApple CodecAifc CodecAiff CodecAacFdkAdts CodecAacFdkMp4 CodecMp3 CodecVorbis Odp TestFramework ohNet)
 target_compile_definitions(ohMediaPlayerTestUtils PUBLIC ${ENDIANNESS})
 
 set(TESTSHELL_SOURCES
@@ -1583,7 +1589,7 @@ target_include_directories(TestWebAppFramework PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(TestWebAppFramework PUBLIC ohNet PLATFORM WebAppFrameworkTestUtils WebAppFramework ohMediaPlayer)
+target_link_libraries(TestWebAppFramework PUBLIC ohNet WebAppFrameworkTestUtils WebAppFramework ohMediaPlayer)
 target_compile_definitions(TestWebAppFramework PUBLIC ${ENDIANNESS})
 
 set(TESTCONFIGUI_SOURCES
@@ -1598,7 +1604,7 @@ target_include_directories(TestConfigUi PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(TestConfigUi PUBLIC ohNet PLATFORM ConfigUiTestUtils WebAppFrameworkTestUtils ConfigUi WebAppFramework ohMediaPlayerTestUtils SourcePlaylist SourceRadio SourceSongcast SourceScd SourceRaop SourceUpnpAv ohMediaPlayer)
+target_link_libraries(TestConfigUi PUBLIC ohNet ConfigUiTestUtils WebAppFrameworkTestUtils ConfigUi WebAppFramework ohMediaPlayerTestUtils SourcePlaylist SourceRadio SourceSongcast SourceScd SourceRaop SourceUpnpAv ohMediaPlayer)
 target_compile_definitions(TestConfigUi PUBLIC ${ENDIANNESS})
 
 set(TESTRAOP_SOURCES

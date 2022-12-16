@@ -3,6 +3,11 @@ project(ohPipeline LANGUAGES CXX C)
 
 if(NOT DEFINED OHNET_PATH)
   message(FATAL_ERROR "You need to provide -DOHNET_PATH that points to built headers")
+  # directory that contains "include" and "lib" folders
+endif()
+
+if(NOT DEFINED PRECOMPILED_3RD_PARTY)
+  message(FATAL_ERROR "You need to provide -DPRECOMPILED_3RD_PARTY that points to built headers")
 endif()
 
 set(ENDIANNESS DEFINE_LITTLE_ENDIAN)
