@@ -72,4 +72,5 @@ target_include_directories(ohPipeline PUBLIC
   ${OHNET_PATH}/include/ohnet
   ${THIRDPARTY_HEADERS}
 )
+target_link_libraries(ohPipeline ${CONAN_LIBS} ohNetCore)
 target_compile_definitions(ohPipeline PUBLIC ${ENDIANNESS})

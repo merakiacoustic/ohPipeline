@@ -72,5 +72,5 @@ target_include_directories(ohMediaPlayer PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_directories(ohMediaPlayer PUBLIC ${OHNET_PATH}/lib)
+target_link_directories(ohMediaPlayer PUBLIC ${OHNET_PATH}/lib ${CONAN_LIBS})
 target_compile_definitions(ohMediaPlayer PUBLIC ${ENDIANNESS})
