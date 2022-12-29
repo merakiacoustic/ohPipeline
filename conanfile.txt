@@ -10,4 +10,3 @@ libmad/0.15.1b
 cmake
 CMakeDeps
 CMakeToolchain
-json

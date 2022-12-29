@@ -3,12 +3,6 @@
 tags
 
 /build*/
-/dependencies/
-/waf-*-*
-/.waf-*/
-/waf3-*-*
-/.waf3-*/
-/.lock-*
 /install
 /transmute-output
 
@@ -20,10 +14,6 @@ tags
 # PyCharm project files
 /.idea
 
-# waf auto-generated Visual Studio solution
-project.*
-.depproj/
-.vs/
 .vscode/*
 
 # FunctionalTest Config
@@ -34,5 +24,3 @@ conan.lock
 conanbuildinfo.*
 conaninfo.txt
 graph_info.json
-
-wafed_libs
