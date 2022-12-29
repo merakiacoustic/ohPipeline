@@ -322,18 +322,6 @@ set_target_properties(libOgg PROPERTIES LINKER_LANGUAGE CXX)
 
 set(CODECFLAC_SOURCES
   OpenHome/Media/Codec/Flac.cpp
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/bitreader.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/bitmath.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/cpu.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/crc.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/fixed.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/format.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/lpc.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/md5.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/memory.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/stream_decoder.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/ogg_decoder_aspect.c.92.o
-  ${PRECOMPILED_3RD_PARTY}/flac-1.2.1/src/libFLAC/ogg_mapping.c.92.o
 )
 
 add_library(CodecFlac STATIC ${CODECFLAC_SOURCES})
@@ -343,6 +331,7 @@ target_include_directories(CodecFlac PUBLIC
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
+  ${CONAN_LIBS}
 )
 target_link_libraries(CodecFlac PUBLIC libOgg ohNet)
 target_compile_definitions(CodecFlac PUBLIC ${ENDIANNESS})

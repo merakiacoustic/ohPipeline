@@ -1,5 +1,6 @@
 [requires]
 libressl/2.9.2
+flac/1.3.3
 
 [generators]
 cmake

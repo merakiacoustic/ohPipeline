@@ -20,11 +20,6 @@ conan_basic_setup()
 set(ENDIANNESS DEFINE_LITTLE_ENDIAN)
 set(THIRDPARTY_HEADERS
   thirdparty/libogg/include
-  thirdparty/flac-1.2.1
-  thirdparty/flac-1.2.1/src/plugin_winamp2/include
-  thirdparty/flac-1.2.1/src/share/replaygain_synthesis/include
-  thirdparty/flac-1.2.1/src/libFLAC/include
-  thirdparty/flac-1.2.1/include
   thirdparty/fdk-aac/libMpegTPDec/include
   thirdparty/fdk-aac/libFDK/include
   thirdparty/fdk-aac/libAACenc/include
