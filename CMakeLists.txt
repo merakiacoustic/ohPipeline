@@ -7,8 +7,30 @@ conan_basic_setup()
 
 set(ENDIANNESS DEFINE_LITTLE_ENDIAN)
 
-set(PLATFORM Linux-x64/ohNet-Linux-x64-Release)
-set(CODEGEN_EXECUTABLE "${CMAKE_SOURCE_DIR}/dependencies/${PLATFORM}/lib/ServiceGen/ServiceGen.py")
+function (download_and_extract URL TARGET_PATH ARCHIVE_PATH)
+  if(NOT EXISTS ${ARCHIVE_PATH})
+    message("Downloading ${URL}")
+    file(DOWNLOAD ${URL} ${ARCHIVE_PATH})
+    file(MAKE_DIRECTORY ${TARGET_PATH})
+
+    message("Extracting downloaded file to ${TARGET_PATH}")
+    file(ARCHIVE_EXTRACT INPUT ${ARCHIVE_PATH} DESTINATION ${TARGET_PATH})
+  endif()
+
+endfunction()
+
+# TODO: add other platforms
+set(DEPS_PLATFORM Linux-x64)
+set(CMAKE_BUILD_TYPE Release)
+
+set(OHNET_DEPS_VERSION "1.32.4350_m1")
+set(OHNET_DEPS_FILE "ohNet-${DEPS_PLATFORM}-${CMAKE_BUILD_TYPE}.tar.gz")
+set(OHNET_DEPS_URL "https://github.com/merakiacoustic/ohNet/releases/download/ohNet_${OHNET_DEPS_VERSION}/${OHNET_DEPS_FILE}")
+set(OHNET_DIR ${CMAKE_BINARY_DIR}/ohNet-${DEPS_PLATFORM}-${CMAKE_BUILD_TYPE})
+
+download_and_extract(${OHNET_DEPS_URL} ${CMAKE_BINARY_DIR} "${CMAKE_BINARY_DIR}/${OHNET_DEPS_FILE}")
+
+set(CODEGEN_EXECUTABLE "${OHNET_DIR}/lib/ServiceGen/ServiceGen.py")
 set(GENERATED_FILES "")
 
 macro(generate_source xml domain type version target)
@@ -69,29 +91,6 @@ add_custom_target(
   fake_target_runs_dependencies ALL
   DEPENDS ${GENERATED_FILES}
 )
-
-function (download_and_extract URL TARGET_PATH ARCHIVE_PATH)
-  if(NOT EXISTS ${ARCHIVE_PATH})
-    message("Downloading ${URL}")
-    file(DOWNLOAD ${URL} ${ARCHIVE_PATH})
-    file(MAKE_DIRECTORY ${TARGET_PATH})
-
-    message("Extracting downloaded file to ${TARGET_PATH}")
-    file(ARCHIVE_EXTRACT INPUT ${ARCHIVE_PATH} DESTINATION ${TARGET_PATH})
-  endif()
-
-endfunction()
-
-# TODO: add other platforms
-set(DEPS_PLATFORM Linux-x64)
-set(CMAKE_BUILD_TYPE Release)
-
-set(OHNET_DEPS_VERSION "1.32.4350_m1")
-set(OHNET_DEPS_FILE "ohNet-${DEPS_PLATFORM}-${CMAKE_BUILD_TYPE}.tar.gz")
-set(OHNET_DEPS_URL "https://github.com/merakiacoustic/ohNet/releases/download/ohNet_${OHNET_DEPS_VERSION}/${OHNET_DEPS_FILE}")
-set(OHNET_DIR ${CMAKE_BINARY_DIR}/ohNet-${DEPS_PLATFORM}-${CMAKE_BUILD_TYPE})
-
-download_and_extract(${OHNET_DEPS_URL} ${CMAKE_BINARY_DIR} "${CMAKE_BINARY_DIR}/${OHNET_DEPS_FILE}")
 
 add_library(ohNet INTERFACE)
 target_link_libraries(ohNet INTERFACE
