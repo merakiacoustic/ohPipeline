@@ -405,17 +405,6 @@ target_compile_definitions(CodecAacFdkAdts PUBLIC ${ENDIANNESS})
 
 set(CODECMP3_SOURCES
   OpenHome/Media/Codec/Mp3.cpp
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/version.c.99.o
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/fixed.c.99.o
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/bit.c.99.o
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/timer.c.99.o
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/stream.c.99.o
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/frame.c.99.o
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/synth.c.99.o
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/decoder.c.99.o
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/layer12.c.99.o
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/layer3.c.99.o
-  ${PRECOMPILED_3RD_PARTY}/libmad-0.15.1b/huffman.c.99.o
 )
 
 add_library(CodecMp3 STATIC ${CODECMP3_SOURCES})
@@ -426,7 +415,7 @@ target_include_directories(CodecMp3 PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(CodecMp3 PUBLIC ohNet)
+target_link_libraries(CodecMp3 PUBLIC ohNet ${CONAN_LIBS})
 target_compile_definitions(CodecMp3 PUBLIC ${ENDIANNESS})
 
 set(CODECVORBIS_SOURCES

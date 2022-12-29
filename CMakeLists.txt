@@ -19,7 +19,6 @@ conan_basic_setup()
 
 set(ENDIANNESS DEFINE_LITTLE_ENDIAN)
 set(THIRDPARTY_HEADERS
-  thirdparty/libmad-0.15.1b
   thirdparty/Tremor
 )
 
