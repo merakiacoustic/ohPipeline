@@ -19,7 +19,6 @@ conan_basic_setup()
 
 set(ENDIANNESS DEFINE_LITTLE_ENDIAN)
 set(THIRDPARTY_HEADERS
-  thirdparty/Tremor
 )
 
 set(PLATFORM Linux-x64/ohNet-Linux-x64-Release)
@@ -58,8 +57,8 @@ add_compile_options(-g -pipe -D_GNU_SOURCE -D_REENTRANT -DDEFINE_TRACE -fvisibil
 # setup third party libs
 # add_compile_definitions(VERSION=1.2.1 FLAC__NO_DLL FLAC__HAS_OGG) #flac
 # add_compile_definitions(TARGET_RT_LITTLE_ENDIAN) #apple_alac
-add_compile_definitions(FDK_ASSERT_ENABLE FDK_LITTLE_ENDIAN) #fdk aac
-add_compile_definitions(OPT_ACCURACY HAVE_CONFIG_H FPM_PPC) #Mad (mp3)
+# add_compile_definitions(FDK_ASSERT_ENABLE FDK_LITTLE_ENDIAN) #fdk aac
+# add_compile_definitions(OPT_ACCURACY HAVE_CONFIG_H FPM_PPC) #Mad (mp3)
 add_compile_definitions(BIG_ENDIAN BYTE_ORDER=BIG_ENDIAN) #vorbis
 
 

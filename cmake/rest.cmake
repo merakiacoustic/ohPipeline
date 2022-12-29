@@ -420,31 +420,38 @@ target_compile_definitions(CodecMp3 PUBLIC ${ENDIANNESS})
 
 set(CODECVORBIS_SOURCES
   OpenHome/Media/Codec/Vorbis.cpp
-  ${PRECOMPILED_3RD_PARTY}/Tremor/block.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/codebook.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/floor0.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/floor1.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/info.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/mapping0.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/mdct.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/registry.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/res012.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/sharedbook.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/synthesis.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/vorbisfile.c.100.o
-  ${PRECOMPILED_3RD_PARTY}/Tremor/window.c.100.o
+  thirdparty/Tremor/block.c
+  thirdparty/Tremor/codebook.c
+  thirdparty/Tremor/floor0.c
+  thirdparty/Tremor/floor1.c
+  thirdparty/Tremor/info.c
+  thirdparty/Tremor/mapping0.c
+  thirdparty/Tremor/mdct.c
+  thirdparty/Tremor/registry.c
+  thirdparty/Tremor/res012.c
+  thirdparty/Tremor/sharedbook.c
+  thirdparty/Tremor/synthesis.c
+  thirdparty/Tremor/vorbisfile.c
+  thirdparty/Tremor/window.c
 )
 
 add_library(CodecVorbis STATIC ${CODECVORBIS_SOURCES})
 target_include_directories(CodecVorbis PUBLIC ${CMAKE_SOURCE_DIR})
 target_include_directories(CodecVorbis PUBLIC
   ${OHNET_PATH}/include/ohnet
-  ${THIRDPARTY_HEADERS}
+  thirdparty/Tremor
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
 target_link_libraries(CodecVorbis PUBLIC ${CONAN_LIBS} ohNet) #libOgg
 target_compile_definitions(CodecVorbis PUBLIC ${ENDIANNESS})
+
+# yeah, that's python code that could be translated to CMake
+#   if conf.options.dest_platform in ['Core-ppc32']:
+#     conf.env.DEFINES_VORBIS = ['BIG_ENDIAN', 'BYTE_ORDER=BIG_ENDIAN']
+# Vorbis decoder reports warnings under msvc compiler. Ignore these as it is third-party code.
+#   if bld.env.CC_NAME == 'msvc':
+#     vorbis.cflags=['/w']
 
 set(WEBAPPFRAMEWORK_SOURCES
   OpenHome/Web/ResourceHandler.cpp
