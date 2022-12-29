@@ -1,3 +1,15 @@
+## Build ohPipeline with Cmake
+
+Just run these commands
+```sh
+🐧 mkdir build
+🐧 cd build
+🐧 conan install .. --build=missing
+🐧 cmake ..
+🐧 cmake --build .
+```
+
+## Build ohPipeline the hard way
 ohMediaPlayer provides a software av.openhome media renderer.
 See http://wiki.openhome.org/wiki/Av:Developer for an overview of the network services involved.
 

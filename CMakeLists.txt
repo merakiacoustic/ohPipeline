@@ -1,13 +1,6 @@
 cmake_minimum_required(VERSION 3.4.1)
 project(ohPipeline LANGUAGES CXX C)
 
-set(OHNET_PATH "" CACHE PATH "ohNet package containing headers and lib files")
-
-if(NOT DEFINED OHNET_PATH)
-  message(FATAL_ERROR "You need to provide -DOHNET_PATH that points to built headers")
-  # directory that contains "include" and "lib" folders
-endif()
-
 set(CONAN_DISABLE_CHECK_COMPILER 1)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
@@ -77,15 +70,37 @@ add_custom_target(
   DEPENDS ${GENERATED_FILES}
 )
 
+function (download_and_extract URL TARGET_PATH ARCHIVE_PATH)
+  if(NOT EXISTS ${ARCHIVE_PATH})
+    message("Downloading ${URL}")
+    file(DOWNLOAD ${URL} ${ARCHIVE_PATH})
+    file(MAKE_DIRECTORY ${TARGET_PATH})
+
+    message("Extracting downloaded file to ${TARGET_PATH}")
+    file(ARCHIVE_EXTRACT INPUT ${ARCHIVE_PATH} DESTINATION ${TARGET_PATH})
+  endif()
+
+endfunction()
+
+# TODO: add other platforms
+set(DEPS_PLATFORM Linux-x64)
+set(CMAKE_BUILD_TYPE Release)
+
+set(OHNET_DEPS_VERSION "1.32.4350_m1")
+set(OHNET_DEPS_FILE "ohNet-${DEPS_PLATFORM}-${CMAKE_BUILD_TYPE}.tar.gz")
+set(OHNET_DEPS_URL "https://github.com/merakiacoustic/ohNet/releases/download/ohNet_${OHNET_DEPS_VERSION}/${OHNET_DEPS_FILE}")
+set(OHNET_DIR ${CMAKE_BINARY_DIR}/ohNet-${DEPS_PLATFORM}-${CMAKE_BUILD_TYPE})
+
+download_and_extract(${OHNET_DEPS_URL} ${CMAKE_BINARY_DIR} "${CMAKE_BINARY_DIR}/${OHNET_DEPS_FILE}")
 
 add_library(ohNet INTERFACE)
 target_link_libraries(ohNet INTERFACE
-  ${OHNET_PATH}/lib/libohNetCore.a
-  ${OHNET_PATH}/lib/libohNetDevices.a
-  ${OHNET_PATH}/lib/libohNetProxies.a
-  ${OHNET_PATH}/lib/libTestFramework.a
-  ${OHNET_PATH}/lib/ohNetTestsCore.a
-  ${OHNET_PATH}/lib/libohNet.so
+  ${OHNET_DIR}/lib/libohNetCore.a
+  ${OHNET_DIR}/lib/libohNetDevices.a
+  ${OHNET_DIR}/lib/libohNetProxies.a
+  ${OHNET_DIR}/lib/libTestFramework.a
+  ${OHNET_DIR}/lib/ohNetTestsCore.a
+  ${OHNET_DIR}/lib/libohNet.so
 )
 target_compile_definitions(ohNet INTERFACE ${ENDIANNESS})
 

@@ -69,7 +69,7 @@ set(OHPIPELINE_SOURCES
 add_library(ohPipeline STATIC ${OHPIPELINE_SOURCES})
 target_include_directories(ohPipeline PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(ohPipeline PUBLIC
-  ${OHNET_PATH}/include/ohnet
+  ${OHNET_DIR}/include/ohnet
 )
 target_link_libraries(ohPipeline ${CONAN_LIBS} ohNetCore)
 target_compile_definitions(ohPipeline PUBLIC ${ENDIANNESS})
