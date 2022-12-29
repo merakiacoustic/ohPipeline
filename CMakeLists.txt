@@ -2,15 +2,10 @@ cmake_minimum_required(VERSION 3.4.1)
 project(ohPipeline LANGUAGES CXX C)
 
 set(OHNET_PATH "" CACHE PATH "ohNet package containing headers and lib files")
-set(PRECOMPILED_3RD_PARTY "" CACHE PATH "3rd party libraries, downloaded via waf")
 
 if(NOT DEFINED OHNET_PATH)
   message(FATAL_ERROR "You need to provide -DOHNET_PATH that points to built headers")
   # directory that contains "include" and "lib" folders
-endif()
-
-if(NOT DEFINED PRECOMPILED_3RD_PARTY)
-  message(FATAL_ERROR "You need to provide -DPRECOMPILED_3RD_PARTY that points to built headers")
 endif()
 
 set(CONAN_DISABLE_CHECK_COMPILER 1)
@@ -18,8 +13,6 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 set(ENDIANNESS DEFINE_LITTLE_ENDIAN)
-set(THIRDPARTY_HEADERS
-)
 
 set(PLATFORM Linux-x64/ohNet-Linux-x64-Release)
 set(CODEGEN_EXECUTABLE "${CMAKE_SOURCE_DIR}/dependencies/${PLATFORM}/lib/ServiceGen/ServiceGen.py")
@@ -54,13 +47,9 @@ macro(generate_source xml domain type version target)
 endmacro()
 
 add_compile_options(-g -pipe -D_GNU_SOURCE -D_REENTRANT -DDEFINE_TRACE -fvisibility=hidden -O2 -std=c++0x -fexceptions -Wall -m64 -Wno-psabi -fPIC)
-# setup third party libs
-# add_compile_definitions(VERSION=1.2.1 FLAC__NO_DLL FLAC__HAS_OGG) #flac
-# add_compile_definitions(TARGET_RT_LITTLE_ENDIAN) #apple_alac
-# add_compile_definitions(FDK_ASSERT_ENABLE FDK_LITTLE_ENDIAN) #fdk aac
-# add_compile_definitions(OPT_ACCURACY HAVE_CONFIG_H FPM_PPC) #Mad (mp3)
-add_compile_definitions(BIG_ENDIAN BYTE_ORDER=BIG_ENDIAN) #vorbis
 
+# setup third party libs
+add_compile_definitions(BIG_ENDIAN BYTE_ORDER=BIG_ENDIAN) #vorbis
 
 find_package(Python3 COMPONENTS Interpreter)
 
@@ -89,7 +78,6 @@ add_custom_target(
 )
 
 
-# tutaj
 add_library(ohNet INTERFACE)
 target_link_libraries(ohNet INTERFACE
   ${OHNET_PATH}/lib/libohNetCore.a
@@ -104,5 +92,3 @@ target_compile_definitions(ohNet INTERFACE ${ENDIANNESS})
 include(${CMAKE_SOURCE_DIR}/cmake/ohpipeline.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/ohmediaplayer.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/rest.cmake)
-
-# set_property(GLOBAL PROPERTY LINK_FLAGS "-Wl,--whole-archive")
