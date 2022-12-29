@@ -313,13 +313,6 @@ target_include_directories(CodecAiff PUBLIC
 target_link_libraries(CodecAiff PUBLIC CodecAiffBase ohNet)
 target_compile_definitions(CodecAiff PUBLIC ${ENDIANNESS})
 
-add_library(libOgg STATIC
-  ${PRECOMPILED_3RD_PARTY}/libogg/src/bitwise.c.91.o
-  ${PRECOMPILED_3RD_PARTY}/libogg/src/framing.c.91.o
-)
-target_compile_definitions(libOgg PRIVATE ${ENDIANNESS})
-set_target_properties(libOgg PROPERTIES LINKER_LANGUAGE CXX)
-
 set(CODECFLAC_SOURCES
   OpenHome/Media/Codec/Flac.cpp
 )
@@ -331,9 +324,8 @@ target_include_directories(CodecFlac PUBLIC
   ${THIRDPARTY_HEADERS}
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
-  ${CONAN_LIBS}
 )
-target_link_libraries(CodecFlac PUBLIC libOgg ohNet)
+target_link_libraries(CodecFlac PUBLIC ${CONAN_LIBS} ohNet) # libFlac libOgg
 target_compile_definitions(CodecFlac PUBLIC ${ENDIANNESS})
 
 set(CODECALACAPPLEBASE_SOURCES
@@ -545,7 +537,7 @@ target_include_directories(CodecVorbis PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(CodecVorbis PUBLIC libOgg ohNet)
+target_link_libraries(CodecVorbis PUBLIC ${CONAN_LIBS} ohNet) #libOgg
 target_compile_definitions(CodecVorbis PUBLIC ${ENDIANNESS})
 
 set(WEBAPPFRAMEWORK_SOURCES
