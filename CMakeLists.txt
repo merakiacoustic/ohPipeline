@@ -19,15 +19,6 @@ conan_basic_setup()
 
 set(ENDIANNESS DEFINE_LITTLE_ENDIAN)
 set(THIRDPARTY_HEADERS
-  thirdparty/fdk-aac/libMpegTPDec/include
-  thirdparty/fdk-aac/libFDK/include
-  thirdparty/fdk-aac/libAACenc/include
-  thirdparty/fdk-aac/libPCMutils/include
-  thirdparty/fdk-aac/libSBRenc/include
-  thirdparty/fdk-aac/libAACdec/include
-  thirdparty/fdk-aac/libMpegTPEnc/include
-  thirdparty/fdk-aac/libSYS/include
-  thirdparty/fdk-aac/libSBRdec/include
   thirdparty/libmad-0.15.1b
   thirdparty/Tremor
 )

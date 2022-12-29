@@ -358,83 +358,6 @@ target_include_directories(CodecAlacApple PUBLIC
 target_link_libraries(CodecAlacApple PUBLIC CodecAlacAppleBase ohNet)
 target_compile_definitions(CodecAlacApple PUBLIC ${ENDIANNESS})
 
-set(CODECAACFDK_SOURCES
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_drc.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_hcr_bit.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_hcr.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_hcrs.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdecoder.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdecoder_lib.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_pns.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aacdec_tns.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aac_ram.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/aac_rom.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/block.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/channel.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/channelinfo.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/conceal.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/ldfiltbank.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/pulsedata.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/rvlcbit.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/rvlcconceal.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/rvlc.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libAACdec/src/stereo.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/autocorr2nd.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/dct.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_bitbuffer.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_core.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_crc.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_hybrid.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_tools_rom.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/FDK_trigFcts.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/fft.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/fft_rad2.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/fixpoint_math.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/mdct.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/qmf.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libFDK/src/scale.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_adif.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_adts.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_asc.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_drm.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_latm.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libMpegTPDec/src/tpdec_lib.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libPCMutils/src/limiter.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libPCMutils/src/pcmutils_lib.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/env_calc.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/env_dec.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/env_extr.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/huff_dec.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/lpp_tran.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/psbitdec.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/psdec.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/psdec_hybrid.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbr_crc.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbr_deb.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbr_dec.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbrdec_drc.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbrdec_freq_sca.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbrdecoder.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbr_ram.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSBRdec/src/sbr_rom.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSYS/src/cmdl_parser.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSYS/src/conv_string.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSYS/src/genericStds.cpp.95.o
-  ${PRECOMPILED_3RD_PARTY}/fdk-aac/libSYS/src/wav_file.cpp.95.o
-)
-
-add_library(CodecAacFdk STATIC ${CODECAACFDK_SOURCES})
-set_target_properties(CodecAacFdk PROPERTIES LINKER_LANGUAGE CXX)
-
-target_include_directories(CodecAacFdk PUBLIC ${CMAKE_SOURCE_DIR})
-target_include_directories(CodecAacFdk PUBLIC
-  ${OHNET_PATH}/include/ohnet
-  ${THIRDPARTY_HEADERS}
-  ${CMAKE_BINARY_DIR}
-  "${CMAKE_BINARY_DIR}/Generated"
-)
-target_link_libraries(CodecAacFdk PUBLIC ohNet)
-target_compile_definitions(CodecAacFdk PUBLIC ${ENDIANNESS})
 set(CODECAACFDKBASE_SOURCES
   OpenHome/Media/Codec/AacFdkBase.cpp
 )
@@ -447,7 +370,7 @@ target_include_directories(CodecAacFdkBase PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(CodecAacFdkBase PUBLIC CodecAacFdk ohNet)
+target_link_libraries(CodecAacFdkBase PUBLIC ${CONAN_LIBS} ohNet) # libAacFdk
 target_compile_definitions(CodecAacFdkBase PUBLIC ${ENDIANNESS})
 
 set(CODECAACFDKMP4_SOURCES

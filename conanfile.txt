@@ -3,6 +3,7 @@ libressl/2.9.2
 flac/1.3.3
 ogg/1.3.5
 alac/cci.20121212
+libfdk_aac/2.0.2
 
 [generators]
 cmake

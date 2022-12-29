@@ -4,7 +4,7 @@
 #include <OpenHome/Media/Codec/Container.h>
 
 extern "C" {
-#include <aacdecoder_lib.h>
+#include <fdk-aac/aacdecoder_lib.h>
 }
 
 

@@ -7,7 +7,7 @@
 #include <string.h>
 
 extern "C" {
-#include <aacdecoder_lib.h>
+#include <fdk-aac/aacdecoder_lib.h>
 }
 
 
