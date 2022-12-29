@@ -330,12 +330,6 @@ target_compile_definitions(CodecFlac PUBLIC ${ENDIANNESS})
 
 set(CODECALACAPPLEBASE_SOURCES
   OpenHome/Media/Codec/AlacAppleBase.cpp
-  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/ag_dec.c.93.o
-  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/ALACDecoder.cpp.93.o
-  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/ALACBitUtilities.c.93.o
-  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/dp_dec.c.93.o
-  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/EndianPortable.c.93.o
-  ${PRECOMPILED_3RD_PARTY}/apple_alac/codec/matrix_dec.c.93.o
 )
 
 add_library(CodecAlacAppleBase STATIC ${CODECALACAPPLEBASE_SOURCES})
@@ -346,7 +340,7 @@ target_include_directories(CodecAlacAppleBase PUBLIC
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_libraries(CodecAlacAppleBase PUBLIC ohNet ohMediaPlayer)
+target_link_libraries(CodecAlacAppleBase PUBLIC ${CONAN_LIBS} ohNet ohMediaPlayer) # apple_alac
 target_compile_definitions(CodecAlacAppleBase PUBLIC ${ENDIANNESS})
 
 set(CODECALACAPPLE_SOURCES
