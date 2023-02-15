@@ -17,6 +17,7 @@
 #include <OpenHome/Os.h>
 #include <OpenHome/OsWrapper.h>
 
+#include <limits>
 #include <algorithm>
 
 namespace OpenHome {

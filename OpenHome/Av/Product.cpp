@@ -15,6 +15,8 @@
 #include <OpenHome/Av/TransportControl.h>
 #include <OpenHome/ThreadPool.h>
 
+#include <limits>
+
 using namespace OpenHome;
 using namespace OpenHome::Net;
 using namespace OpenHome::Av;

@@ -4,6 +4,8 @@
 #include <OpenHome/Private/Debug.h>
 #include <OpenHome/Private/Parser.h>
 
+#include <limits>
+
 using namespace OpenHome;
 using namespace Media;
 
