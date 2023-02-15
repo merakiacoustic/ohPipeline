@@ -1,6 +1,5 @@
 
 set(OHMEDIAPLAYER_SOURCES
-  OpenHome/Av/Utils/FaultCode.cpp
   OpenHome/Av/KvpStore.cpp
   OpenHome/Av/ProviderUtils.cpp
   OpenHome/Av/Product.cpp
@@ -13,6 +12,7 @@ set(OHMEDIAPLAYER_SOURCES
   OpenHome/Av/Radio/TuneInPins.cpp
   OpenHome/Av/Radio/RadioPins.cpp
   OpenHome/Av/Pins/UrlPins.cpp
+  OpenHome/Av/Utils/FaultCode.cpp
   OpenHome/Av/CalmRadio/CalmRadioPins.cpp
   OpenHome/Av/ProviderVolume.cpp
   OpenHome/Av/Source.cpp
@@ -67,9 +67,12 @@ set(OHMEDIAPLAYER_SOURCES
 add_library(ohMediaPlayer STATIC ${OHMEDIAPLAYER_SOURCES})
 target_include_directories(ohMediaPlayer PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(ohMediaPlayer PUBLIC
-${OHNET_DIR}/include/ohnet
   ${CMAKE_BINARY_DIR}
   "${CMAKE_BINARY_DIR}/Generated"
 )
-target_link_directories(ohMediaPlayer PUBLIC ${OHNET_DIR}/lib ${CONAN_LIBS})
+target_link_libraries(ohMediaPlayer PUBLIC
+  ohnet::ohnet
+  libressl::libressl
+)
+add_dependencies(ohMediaPlayer oh_codegen)
 target_compile_definitions(ohMediaPlayer PUBLIC ${ENDIANNESS})

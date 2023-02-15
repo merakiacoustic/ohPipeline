@@ -1,36 +1,22 @@
 cmake_minimum_required(VERSION 3.4.1)
 project(ohPipeline LANGUAGES CXX C)
 
-set(CONAN_DISABLE_CHECK_COMPILER 1)
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
+find_package(ohnet REQUIRED)
+find_package(LibreSSL REQUIRED)
+find_package(alac REQUIRED)
+find_package(flac REQUIRED)
+find_package(Ogg REQUIRED)
+find_package(fdk-aac REQUIRED)
+find_package(libmad REQUIRED)
 
 set(ENDIANNESS DEFINE_LITTLE_ENDIAN)
-
-function (download_and_extract URL TARGET_PATH ARCHIVE_PATH)
-  if(NOT EXISTS ${ARCHIVE_PATH})
-    message("Downloading ${URL}")
-    file(DOWNLOAD ${URL} ${ARCHIVE_PATH})
-    file(MAKE_DIRECTORY ${TARGET_PATH})
-
-    message("Extracting downloaded file to ${TARGET_PATH}")
-    file(ARCHIVE_EXTRACT INPUT ${ARCHIVE_PATH} DESTINATION ${TARGET_PATH})
-  endif()
-
-endfunction()
 
 # TODO: add other platforms
 set(DEPS_PLATFORM Linux-x64)
 set(CMAKE_BUILD_TYPE Release)
 
-set(OHNET_DEPS_VERSION "1.32.4350_m1")
-set(OHNET_DEPS_FILE "ohNet-${DEPS_PLATFORM}-${CMAKE_BUILD_TYPE}.tar.gz")
-set(OHNET_DEPS_URL "https://github.com/merakiacoustic/ohNet/releases/download/ohNet_${OHNET_DEPS_VERSION}/${OHNET_DEPS_FILE}")
-set(OHNET_DIR ${CMAKE_BINARY_DIR}/ohNet-${DEPS_PLATFORM}-${CMAKE_BUILD_TYPE})
-
-download_and_extract(${OHNET_DEPS_URL} ${CMAKE_BINARY_DIR} "${CMAKE_BINARY_DIR}/${OHNET_DEPS_FILE}")
-
-set(CODEGEN_EXECUTABLE "${OHNET_DIR}/lib/ServiceGen/ServiceGen.py")
+set(CODEGEN_EXECUTABLE "${CMAKE_CURRENT_BINARY_DIR}/ServiceGen.py")
+# message(FATAL_ERROR "Pytoniec jest ${CODEGEN_EXECUTABLE}")
 set(GENERATED_FILES "")
 
 macro(generate_source xml domain type version target)
@@ -53,8 +39,8 @@ macro(generate_source xml domain type version target)
       -d ${domain}
       -y ${type}
       -v ${version}
-      MAIN_DEPENDENCY ${abs_xml}
-      COMMENT "Generating code for ${target}."
+      DEPENDS ${CODEGEN_EXECUTABLE} ${abs_xml}
+      COMMENT "Generating code for ${target} -> ${OUTPUT_PATH}."
       VERBATIM
     )
     set(GENERATED_FILES ${GENERATED_FILES} ${OUTPUT_PATH})
@@ -88,20 +74,9 @@ generate_source("OpenHome/Av/ServiceXml/OpenHome/Pins1.xml" "av.openhome.org" "P
 
 # force to generate files (especially headers)
 add_custom_target(
-  fake_target_runs_dependencies ALL
+  oh_codegen
   DEPENDS ${GENERATED_FILES}
 )
-
-add_library(ohNet INTERFACE)
-target_link_libraries(ohNet INTERFACE
-  ${OHNET_DIR}/lib/libohNetCore.a
-  ${OHNET_DIR}/lib/libohNetDevices.a
-  ${OHNET_DIR}/lib/libohNetProxies.a
-  ${OHNET_DIR}/lib/libTestFramework.a
-  ${OHNET_DIR}/lib/ohNetTestsCore.a
-  ${OHNET_DIR}/lib/libohNet.so
-)
-target_compile_definitions(ohNet INTERFACE ${ENDIANNESS})
 
 include(${CMAKE_SOURCE_DIR}/cmake/ohpipeline.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/ohmediaplayer.cmake)
