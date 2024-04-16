@@ -10,6 +10,7 @@ tags
 /.lock-*
 /install
 /transmute-output
+CMakeUserPresets.json
 
 # Eclipse project files
 .cproject
@@ -31,3 +32,4 @@ ohMediaPlayer.*
 
 # FunctionalTest Config
 .testconfig.xml
+
