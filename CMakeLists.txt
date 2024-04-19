@@ -997,6 +997,7 @@ target_include_directories(ConfigUi PUBLIC ${CMAKE_SOURCE_DIR})
 target_include_directories(ConfigUi PUBLIC
   ${CMAKE_BINARY_DIR}
 )
+add_dependencies(ConfigUi oh_codegen)
 target_link_libraries(ConfigUi PUBLIC WebAppFramework ohNet)
 target_sources(ConfigUi PUBLIC FILE_SET HEADERS FILES "${CONFIGUI_HEADERS}")
 target_compile_features(ConfigUi PUBLIC cxx_std_11)
