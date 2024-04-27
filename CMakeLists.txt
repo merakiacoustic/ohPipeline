@@ -11,21 +11,8 @@ find_package(flac REQUIRED CONFIG)
 find_package(Ogg REQUIRED CONFIG)
 find_package(Vorbis REQUIRED CONFIG)
 
-function(generate_upnp_service xml domain type version target)
-    add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Dv${target}.h
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${xml}
-    COMMAND python ServiceGen.py
-        -t DvUpnpCppCoreHeader.py
-        -o ${CMAKE_CURRENT_BINARY_DIR}
-        -x ${xml}
-        -d ${domain}
-        -y ${type}
-        -v ${version}
-    )
-endfunction(generate_upnp_service xml domain type version target)
-
-string(TOUPPER "${CMAKE_BUILD_TYPE}" BUILD_TYPE_UPPER)
-set(CODEGEN_EXECUTABLE "${ohnet_BUILD_DIRS_${BUILD_TYPE_UPPER}}/ServiceGen.py")
+set(CODEGEN_EXECUTABLE "${ohnet_BUILD_DIRS_RELEASE}${ohnet_BUILD_DIRS_DEBUG}/ServiceGen.py")
+message("CODEGEN_EXECUTABLE: ${CODEGEN_EXECUTABLE}")
 set(GENERATED_FILES "")
 
 find_package(Python3 COMPONENTS Interpreter)
