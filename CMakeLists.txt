@@ -188,6 +188,7 @@ set(ohPipeline_HEADERS
     OpenHome/Media/Pipeline/Attenuator.h
     OpenHome/Media/Pipeline/Ramper.h
     OpenHome/Media/Pipeline/Reporter.h
+    OpenHome/Media/Pipeline/AsyncTrackObserver.h
     OpenHome/Media/Pipeline/AirplayReporter.h
     OpenHome/Media/Pipeline/SpotifyReporter.h
     OpenHome/Media/Pipeline/RampValidator.h
@@ -197,6 +198,7 @@ set(ohPipeline_HEADERS
     OpenHome/Media/Pipeline/Seeker.h
     OpenHome/Media/Pipeline/PhaseAdjuster.h
     OpenHome/Media/Pipeline/Skipper.h
+    OpenHome/Media/Pipeline/StarterTimed.h
     OpenHome/Media/Pipeline/StarvationRamper.h
     OpenHome/Media/Pipeline/Stopper.h
     OpenHome/Media/Pipeline/TrackInspector.h
@@ -204,6 +206,7 @@ set(ohPipeline_HEADERS
     OpenHome/Media/Pipeline/Waiter.h
     OpenHome/Media/Pipeline/Pipeline.h
     OpenHome/Media/Pipeline/ElementObserver.h
+    OpenHome/Media/ArtworkServer.h
     OpenHome/Media/ClockPuller.h
     OpenHome/Media/IdManager.h
     OpenHome/Media/Filler.h
@@ -217,6 +220,7 @@ set(ohPipeline_HEADERS
     OpenHome/Media/Codec/Id3v2.h
     OpenHome/Media/Codec/MpegTs.h
     OpenHome/Media/Codec/CodecController.h
+    OpenHome/Media/Codec/DsdFiller.h
     OpenHome/Media/Protocol/Protocol.h
     OpenHome/Media/Protocol/ProtocolHls.h
     OpenHome/Media/Protocol/ProtocolTone.h
@@ -224,6 +228,7 @@ set(ohPipeline_HEADERS
     OpenHome/Media/Protocol/Rtsp.h
     OpenHome/Media/Protocol/ProtocolRtsp.h
     OpenHome/Media/Protocol/ContentAudio.h
+    OpenHome/Media/Protocol/ContentMpd.h
     OpenHome/Media/UriProviderRepeater.h
     OpenHome/Media/UriProviderSingleTrack.h
     OpenHome/Media/PipelineManager.h
@@ -236,7 +241,8 @@ set(ohPipeline_HEADERS
     OpenHome/Configuration/ConfigManager.h
     OpenHome/Media/Utils/Silencer.h
     OpenHome/SocketHttp.h
-    OpenHome/SocketSsl.h)
+    OpenHome/SocketSsl.h
+    OpenHome/Av/OhMetadata.h)
 target_sources(ohPipeline PUBLIC FILE_SET HEADERS FILES "${ohPipeline_HEADERS}")
 target_compile_features(ohPipeline PUBLIC cxx_std_11)
 install(
@@ -284,7 +290,6 @@ set(OHMEDIAPLAYER_SOURCES
     OpenHome/Av/ProviderDebug.cpp
     OpenHome/Av/Pins/Pins.cpp
     OpenHome/Av/Pins/ProviderPins.cpp
-    OpenHome/Av/OhMetadata.cpp
     Generated/DvAvOpenhomeOrgProduct4.cpp
     Generated/CpAvOpenhomeOrgProduct4.cpp
     Generated/DvAvOpenhomeOrgTime1.cpp
