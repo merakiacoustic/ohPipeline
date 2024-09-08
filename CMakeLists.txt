@@ -266,6 +266,7 @@ set(OHMEDIAPLAYER_SOURCES
     OpenHome/Av/ProviderProduct.cpp
     OpenHome/Av/ProviderTime.cpp
     OpenHome/Av/ProviderInfo.cpp
+    OpenHome/Av/ProviderOAuth.cpp
     OpenHome/Av/TransportControl.cpp
     OpenHome/Av/ProviderTransport.cpp
     OpenHome/Av/Pins/TransportPins.cpp
@@ -288,6 +289,8 @@ set(OHMEDIAPLAYER_SOURCES
     OpenHome/ThreadPool.cpp
     OpenHome/FsFlushPeriodic.cpp
     OpenHome/Av/Credentials.cpp
+    OpenHome/Av/DeviceAnnouncerMdns.cpp
+    OpenHome/Av/OhMetadata.cpp
     OpenHome/Av/ProviderCredentials.cpp
     OpenHome/Av/VolumeManager.cpp
     OpenHome/Av/FriendlyNameAdapter.cpp
@@ -315,7 +318,9 @@ set(OHMEDIAPLAYER_HEADERS
     OpenHome/Av/ProviderProduct.h
     OpenHome/Av/ProviderTime.h
     OpenHome/Av/ProviderInfo.h
+    OpenHome/Av/ProviderOAuth.h
     OpenHome/Av/TransportControl.h
+    OpenHome/Av/Trim.h
     OpenHome/Av/ProviderTransport.h
     OpenHome/Av/Pins/TransportPins.h
     OpenHome/Av/Radio/TuneInPins.h
@@ -324,7 +329,10 @@ set(OHMEDIAPLAYER_HEADERS
     OpenHome/Av/Utils/FaultCode.h
     OpenHome/Av/CalmRadio/CalmRadioPins.h
     OpenHome/Av/ProviderVolume.h
+    OpenHome/Av/RebootHandler.h
     OpenHome/Av/Source.h
+    OpenHome/Av/SourceFactory.h
+    OpenHome/Av/StringIds.h
     OpenHome/Av/MediaPlayer.h
     OpenHome/Av/Logger.h
     OpenHome/Json.h
@@ -339,10 +347,14 @@ set(OHMEDIAPLAYER_HEADERS
     OpenHome/ThreadPool.h
     OpenHome/FsFlushPeriodic.h
     OpenHome/Av/Credentials.h
+    OpenHome/Av/DeviceAnnouncerMdns.h
+    OpenHome/Av/OhMetadata.h
     OpenHome/Av/ProviderCredentials.h
     OpenHome/Av/VolumeManager.h
+    OpenHome/Av/VolumeOffsets.h
     OpenHome/Av/FriendlyNameAdapter.h
     OpenHome/Av/ProviderDebug.h
+    OpenHome/Av/ProviderFactory.h
     OpenHome/Av/Pins/Pins.h
     OpenHome/Av/Pins/ProviderPins.h)
 add_library(ohMediaPlayer ${OHMEDIAPLAYER_SOURCES})
