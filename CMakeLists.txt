@@ -208,6 +208,7 @@ set(ohPipeline_HEADERS
     OpenHome/Media/Pipeline/ElementObserver.h
     OpenHome/Media/ArtworkServer.h
     OpenHome/Media/ClockPuller.h
+    OpenHome/Media/Debug.h
     OpenHome/Media/IdManager.h
     OpenHome/Media/Filler.h
     OpenHome/Media/Supply.h
@@ -334,6 +335,7 @@ set(OHMEDIAPLAYER_HEADERS
     OpenHome/Av/SourceFactory.h
     OpenHome/Av/StringIds.h
     OpenHome/Av/MediaPlayer.h
+    OpenHome/Av/Debug.h
     OpenHome/Av/Logger.h
     OpenHome/Json.h
     OpenHome/Observable.h
