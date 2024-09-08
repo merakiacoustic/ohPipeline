@@ -219,6 +219,7 @@ set(ohPipeline_HEADERS
     OpenHome/Media/Codec/Container.h
     OpenHome/Media/Codec/Id3v2.h
     OpenHome/Media/Codec/MpegTs.h
+    OpenHome/Media/Codec/CodecFactory.h
     OpenHome/Media/Codec/CodecController.h
     OpenHome/Media/Codec/DsdFiller.h
     OpenHome/Media/Protocol/Protocol.h
