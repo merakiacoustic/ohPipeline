@@ -225,6 +225,7 @@ set(ohPipeline_HEADERS
     OpenHome/Media/Codec/ContainerFactory.h
     OpenHome/Media/Codec/DsdFiller.h
     OpenHome/Media/Protocol/Protocol.h
+    OpenHome/Media/Protocol/ProtocolFactory.h
     OpenHome/Media/Protocol/ProtocolHls.h
     OpenHome/Media/Protocol/ProtocolTone.h
     OpenHome/Media/Protocol/Icy.h
