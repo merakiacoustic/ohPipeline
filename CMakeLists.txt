@@ -525,6 +525,7 @@ set(SOURCE_SONGCAST_HEADERS
     OpenHome/Av/Songcast/OhmSender.h
     OpenHome/Av/Songcast/OhmSenderDriver.h
     OpenHome/Av/Songcast/OhmSocket.h
+    OpenHome/Av/Songcast/OhmTimestamp.h
     OpenHome/Av/Songcast/ProtocolOhBase.h
     OpenHome/Av/Songcast/ProtocolOhu.h
     OpenHome/Av/Songcast/ProtocolOhm.h
