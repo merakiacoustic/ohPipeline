@@ -93,7 +93,7 @@ jobs:
           ./waf build -v
           ./waf bundle
           mv build/ohMediaPlayer.tar.gz build/ohMediaPlayer-$OH_PLATFORM.tar.gz
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         name: Upload artifact
         with:
           name: linux
