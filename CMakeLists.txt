@@ -281,7 +281,6 @@ set(OHMEDIAPLAYER_SOURCES
     OpenHome/Av/MediaPlayer.cpp
     OpenHome/Av/Logger.cpp
     OpenHome/AESHelpers.cpp
-    OpenHome/Json.cpp
     OpenHome/OAuth.cpp
     OpenHome/Av/Utils/FormUrl.cpp
     OpenHome/NtpClient.cpp
@@ -340,7 +339,6 @@ set(OHMEDIAPLAYER_HEADERS
     OpenHome/Av/Debug.h
     OpenHome/Av/Logger.h
     OpenHome/AESHelpers.h
-    OpenHome/Json.h
     OpenHome/OAuth.h
     OpenHome/Observable.h
     OpenHome/Av/Utils/FormUrl.h
